@@ -88,14 +88,14 @@
             <p class="oferta-desc">Estamos selecionando um grupo de 15 microempreendedores para o nosso projeto de
                 aceleração digital. Tenha uma página de alto nível com um investimento inicial acessível.</p>
 
-            <div class="pricing-card">
+            <div class="pricing-card" id="elite-card">
                 <div class="price-row crossed">
                     <span>Agências Tradicionais (Lento)</span>
                     <span class="old-price">R$ 2.000+</span>
                 </div>
                 <div class="price-row highlight">
                     <span>Taxa de Criação Frontlab</span>
-                    <span class="free">R$ 360</span>
+                    <span class="free" id="price-value">R$ 360</span>
                 </div>
 
                 <hr class="divider">
@@ -131,6 +131,8 @@
         </div>
 
         <div class="timeline">
+            <div class="timeline-progress" id="timeline-progress"></div>
+
             <div class="timeline-step">
                 <div class="step-dot">1</div>
                 <div class="step-content">
@@ -157,32 +159,101 @@
             </div>
         </div>
     </section>
+    <section class="feedback-section" id="feedback-module">
+        <div class="section-header">
+            <h2>Validação do Sistema</h2>
+            <p>Logs reais de empreendedores e consultórios após o deploy das nossas máquinas.</p>
+        </div>
 
-    <section class="faq-section">
+        <div class="feedback-container">
+            <div class="feedback-track" id="feedback-track">
+
+                <div class="feedback-card">
+                    <div class="card-sys-header">
+                        <span class="sys-dot online"></span>
+                        <span class="sys-log-id">LOG_ID: #8894_CLINICA</span>
+                    </div>
+                    <p class="feedback-text">"Minha página antiga demorava 6 segundos para abrir. Ninguém chamava no
+                        WhatsApp. A Frontlab entregou uma estrutura em 3 dias e hoje meu custo por paciente caiu pela
+                        metade."</p>
+                    <div class="feedback-author">
+                        <div class="author-avatar">DR</div>
+                        <div class="author-info">
+                            <strong>Dr. Roberto M.</strong>
+                            <span>Diretor Clínico</span>
+                        </div>
+                        <div class="rating js-rating" data-rating="★★★★★"></div>
+                    </div>
+                </div>
+
+                <div class="feedback-card">
+                    <div class="card-sys-header">
+                        <span class="sys-dot online"></span>
+                        <span class="sys-log-id">LOG_ID: #9921_CONSULTING</span>
+                    </div>
+                    <p class="feedback-text">"Investimento que se pagou na primeira semana de tráfego pago. O design
+                        passa muita autoridade aos meus clientes e o carregamento é instantâneo. O suporte é impecável."
+                    </p>
+                    <div class="feedback-author">
+                        <div class="author-avatar">AM</div>
+                        <div class="author-info">
+                            <strong>Amanda Medeiros</strong>
+                            <span>Consultora Financeira</span>
+                        </div>
+                        <div class="rating js-rating" data-rating="★★★★★"></div>
+                    </div>
+                </div>
+
+                <div class="feedback-card">
+                    <div class="card-sys-header">
+                        <span class="sys-dot online"></span>
+                        <span class="sys-log-id">LOG_ID: #7743_SERVICOS</span>
+                    </div>
+                    <p class="feedback-text">"Eu não precisei me preocupar com hospedagem, domínio, nada. Eles
+                        entregaram a máquina pronta. Só precisei plugar meus anúncios e colher os resultados."</p>
+                    <div class="feedback-author">
+                        <div class="author-avatar">JP</div>
+                        <div class="author-info">
+                            <strong>João Paulo</strong>
+                            <span>Serviços B2B</span>
+                        </div>
+                        <div class="rating js-rating" data-rating="★★★★★"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="scroll-indicator">
+                <span class="swipe-icon">↔</span> Deslize para escanear mais logs
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section" id="faq-module">
         <div class="section-header">
             <h2>Dúvidas Frequentes</h2>
         </div>
 
         <div class="faq-container">
-            <details class="faq-item">
+            <details class="faq-item faq-anim">
                 <summary>Eu preciso entender de tecnologia ou comprar algum domínio?</summary>
                 <p>De forma alguma. Nós cuidamos de 100% da infraestrutura técnica. O seu único papel é fechar negócios
                     com os clientes que vão chegar pelo WhatsApp.</p>
             </details>
-            <details class="faq-item">
+            <details class="faq-item faq-anim">
                 <summary>Por que o valor de criação está apenas R$ 360?</summary>
                 <p>Porque desenvolvemos este projeto focados em apoiar microempreendedores que precisam de presença
                     digital profissional, mas não podem investir em uma agência tradicional agora. Queremos construir
                     uma parceria duradoura e crescer junto com você.</p>
             </details>
-            <details class="faq-item">
+            <details class="faq-item faq-anim">
                 <summary>E se eu precisar mudar alguma informação depois?</summary>
                 <p>Nós não te abandonamos. O valor fixo de R$ 90 mensais já inclui todo o nosso suporte, manutenção e
                     pequenas atualizações para sua página nunca ficar desatualizada ou sair do ar.</p>
             </details>
         </div>
 
-        <div class="cta-final">
+        <div class="cta-final faq-anim">
             <h2>Pronto para elevar o nível das suas vendas?</h2>
             <p>As 15 vagas de criação do projeto estão esgotando.</p>
             <a href="https://wa.me/554384137743?text=Fala%20Lucas!%20Quero%20garantir%20minha%20vaga%20no%20Projeto%20Impulso%20Inicial!"
@@ -192,11 +263,44 @@
         </div>
     </section>
 
-    <footer class="simple-footer">
-        <p>© 2026 FRONTLAB STUDIO - Soluções Corporativas Premium.</p>
-    </footer>
+    <footer class="cyber-footer">
+        <div class="footer-content">
+            <p class="sys-copyright">sys_log: © 2026 FRONTLAB STUDIO.</p>
 
-    <script src="../script/empresas.js"></script>
+            <div class="legal-links">
+                <a href="../legal/privacidade.html" class="legal-cmd">
+                    <span class="prompt-arrow">></span> privacidade.sys
+                </a>
+                <a href="termos.html" class="legal-cmd">
+                    <span class="prompt-arrow">></span> termos_uso.sys
+                </a>
+            </div>
+        </div>
+    </footer>
+    <a href="https://wa.me/554384137743?text=Fala%20Lucas!%20Quero%20aproveitar%20a%20oportunidade%20do%20Projeto%20Impulso%20Inicial."
+        target="_blank" rel="noopener noreferrer" class="floating-wpp" aria-label="Falar com a Frontlab no WhatsApp">
+        <div class="wpp-glow"></div>
+        <img src="../assets/svg/whatsapp-icon.png" alt="WhatsApp Frontlab" loading="lazy" width="60" height="60">
+    </a>
+
+    <dialog id="cookie-terminal" class="cookie-dialog">
+        <div class="cookie-header">
+            <span class="sys-title">sys_auth_required</span>
+        </div>
+        <div class="cookie-body">
+            <p class="cookie-msg">
+                <span class="prompt-green">root@frontlab:~$</span> Escaneando ambiente... <br>
+                Para injetar a melhor experiência e rastrear métricas de conversão extrema, utilizamos cookies. Leia as
+                nossas <a href="termos.html" class="cookie-link">Termos de Uso</a>.
+            </p>
+            <div class="cookie-actions">
+                <button id="btn-accept-cookies" class="btn-terminal btn-accept">[ INJETAR_COOKIES ]</button>
+                <button id="btn-reject-cookies" class="btn-terminal btn-reject">[ RECUSAR ]</button>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="../assets/script/impulso.js"></script>
 </body>
 
 </html>
