@@ -1,0 +1,181 @@
+@charset "UTF-8";
+
+/* ========================================================
+   FRONTLAB STUDIO - LEGAL & COMPLIANCE SYSTEM
+   Foco: Leitura, Contraste e Mobile-First
+======================================================== */
+
+body {
+    background-color: #030303;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.legal-page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: clamp(20px, 5vw, 60px) 20px;
+    background: radial-gradient(circle at top center, rgba(0, 243, 255, 0.05) 0%, #030303 100%);
+}
+
+/* --- HEADER DINÂMICO --- */
+.legal-header {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.btn-cd-back {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #10B981;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: 4px;
+    background: rgba(16, 185, 129, 0.05);
+    transition: all 0.3s ease;
+}
+
+.btn-cd-back:hover {
+    background: rgba(16, 185, 129, 0.15);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.2);
+    transform: translateX(-5px);
+}
+
+.frontlab-logo {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
+}
+
+/* --- TERMINAL DE LEITURA --- */
+.legal-terminal {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(5, 5, 5, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+}
+
+.terminal-top-bar {
+    background: #111;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.term-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.term-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.dot-r {
+    background: #ff5f56;
+}
+
+.dot-y {
+    background: #ffbd2e;
+}
+
+.dot-g {
+    background: #27c93f;
+}
+
+.term-title {
+    flex: 1;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.legal-content {
+    padding: clamp(20px, 5vw, 50px);
+}
+
+.legal-content h1 {
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: #00f3ff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    text-wrap: balance;
+}
+
+.legal-content .last-update {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 40px;
+    display: block;
+}
+
+.legal-content h2 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 40px 0 15px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-bottom: 10px;
+}
+
+.legal-content p,
+.legal-content li {
+    font-size: 1rem;
+    color: #a0a0a0;
+    margin-bottom: 20px;
+}
+
+.legal-content ul {
+    margin-left: 0;
+    list-style: none;
+}
+
+.legal-content li {
+    position: relative;
+    padding-left: 20px;
+}
+
+.legal-content li::before {
+    content: '>';
+    position: absolute;
+    left: 0;
+    color: #00f3ff;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+/* --- MOBILE AJUSTES --- */
+@media (width <=600px) {
+    .legal-header {
+        flex-direction: column-reverse;
+        gap: 20px;
+    }
+
+    .btn-cd-back {
+        width: 100%;
+        justify-content: center;
+    }
+}

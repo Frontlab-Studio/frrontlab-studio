@@ -1,0 +1,1377 @@
+@charset "UTF-8";
+
+:root {
+    --bg-color: #030303;
+    --text-color: #ffffff;
+    --primary-b2b: #00f3ff;
+    --primary-b2c: #10B981;
+    --glass: rgba(255, 255, 255, 0.03);
+    --fonte-padrao: 'Inter', sans-serif;
+    --fonte-tech: 'JetBrains Mono', monospace;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    touch-action: manipulation;
+}
+
+body {
+    min-height: 100dvh;
+    width: 100vw;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--fonte-padrao);
+    line-height: 1.6;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+}
+
+img,
+picture,
+svg,
+video {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* --- INTRO ANIMATION --- */
+.intro-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.glitch-text {
+    font-family: var(--fonte-tech);
+    font-size: clamp(2rem, 5vw, 5rem);
+    position: relative;
+    color: white;
+    letter-spacing: 5px;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+}
+
+.glitch-text::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--primary-b2b);
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--primary-b2c);
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #fff;
+    animation: load 2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
+
+@keyframes load {
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes glitch-anim-1 {
+    0% {
+        clip-path: inset(20% 0 80% 0);
+    }
+
+    20% {
+        clip-path: inset(60% 0 10% 0);
+    }
+
+    40% {
+        clip-path: inset(40% 0 50% 0);
+    }
+
+    60% {
+        clip-path: inset(80% 0 5% 0);
+    }
+
+    80% {
+        clip-path: inset(10% 0 70% 0);
+    }
+
+    100% {
+        clip-path: inset(30% 0 20% 0);
+    }
+}
+
+@keyframes glitch-anim-2 {
+    0% {
+        clip-path: inset(10% 0 60% 0);
+    }
+
+    20% {
+        clip-path: inset(30% 0 20% 0);
+    }
+
+    40% {
+        clip-path: inset(70% 0 10% 0);
+    }
+
+    60% {
+        clip-path: inset(20% 0 50% 0);
+    }
+
+    80% {
+        clip-path: inset(90% 0 5% 0);
+    }
+
+    100% {
+        clip-path: inset(50% 0 30% 0);
+    }
+}
+
+/* --- THE HUB (DESKTOP) --- */
+#tech-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.hub-hidden {
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+#hub-main {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.split-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.portal {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    overflow: hidden;
+    transition: flex 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.portal:last-child {
+    border: none;
+}
+
+.portal-content {
+    position: relative;
+    z-index: 2;
+    max-width: 400px;
+    padding: clamp(20px, 5vw, 40px);
+    /* Padding fluido */
+    text-align: left;
+    transform: translateY(20px);
+    opacity: 0.8;
+    transition: all 0.5s ease;
+}
+
+.portal:hover {
+    flex: 1.5;
+}
+
+.portal:hover .portal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.badge {
+    font-family: var(--fonte-tech);
+    font-size: 0.7rem;
+    padding: 5px 12px;
+    border-radius: 50px;
+    letter-spacing: 2px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.tech-badge {
+    border: 1px solid var(--primary-b2b);
+    color: var(--primary-b2b);
+}
+
+.biz-badge {
+    border: 1px solid var(--primary-b2c);
+    color: var(--primary-b2c);
+}
+
+.portal h2 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    line-height: 1.1;
+}
+
+.portal p {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.btn-ghost {
+    font-family: var(--fonte-tech);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-ghost .arrow {
+    transition: transform 0.3s ease;
+}
+
+.portal:hover .btn-ghost .arrow {
+    transform: translateX(10px);
+}
+
+.overlay-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    z-index: 1;
+}
+
+.glow-blue {
+    background: radial-gradient(circle at center, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+}
+
+.glow-green {
+    background: radial-gradient(circle at center, rgba(16, 185, 129, 0.1) 0%, transparent 70%);
+}
+
+.portal:hover .overlay-glow {
+    opacity: 1;
+}
+
+/* --- TRANSIÇÕES DE ROTA (Efeito Espelho) --- */
+.transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    pointer-events: none;
+    z-index: 99999;
+    overflow: hidden;
+}
+
+.neural-slice {
+    position: absolute;
+    width: 130%;
+    height: 10vh;
+    will-change: transform, left, right;
+}
+
+.slice-left {
+    left: -150%;
+    transform: skewX(-45deg);
+    background: var(--primary-b2b);
+    box-shadow: 0 0 20px var(--primary-b2b);
+    transition: left 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+.slice-right {
+    right: -150%;
+    transform: skewX(45deg);
+    background: var(--primary-b2c);
+    box-shadow: 0 0 20px var(--primary-b2c);
+    transition: right 0.8s cubic-bezier(0.8, 0, 0.2, 1);
+}
+
+
+/* =====================================================================
+   VACINA MOBILE - HUB & INTRO
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .split-container {
+        flex-direction: column;
+    }
+
+    .portal {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* DESATIVA A EXPANSÃO NO TOUCH: O "hover" no touch causa vazamento e buga a tela */
+    .portal:hover {
+        flex: 1;
+    }
+
+    .portal h2 {
+        font-size: clamp(2rem, 5vw, 2.5rem);
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .intro-container {
+        padding: 0 20px;
+        text-align: center;
+    }
+
+    .glitch-text {
+        font-size: 2.2rem;
+        white-space: normal;
+        line-height: 1.2;
+    }
+
+    /* Trava o conteúdo para não precisar de "hover" e alinha no centro */
+    .portal-content {
+        text-align: center;
+        transform: none;
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .portal p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    /* Remove brilhos pesados no celular para focar em performance */
+    .overlay-glow {
+        display: none;
+    }
+}
+
+/* 3. Mobile Pequeno (Onde ocorria o zoom de segurança do navegador) */
+@media (width <=360px) {
+    .portal-content {
+        padding: 15px;
+        /* Reduz o padding para evitar estouro da grid de 280px */
+    }
+
+    .portal h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* --- SEÇÃO 2: MANIFESTO (DESKTOP) --- */
+.manifesto-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    padding: 100px 0;
+    z-index: 10;
+}
+
+.kinetic-container {
+    width: 100vw;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 80px;
+}
+
+.k-line {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    white-space: nowrap;
+}
+
+.k-text {
+    font-size: clamp(2rem, 5vw, 7rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+    color: var(--text-color);
+    letter-spacing: -2px;
+    will-change: transform;
+}
+
+.outline-text {
+    color: transparent;
+    -webkit-text-stroke: 2px rgba(255, 255, 255, 0.4);
+}
+
+.manifesto-core {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    width: 100%;
+}
+
+.terminal-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    font-family: var(--fonte-tech);
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    color: #10B981;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.prompt-icon {
+    color: #fff;
+    opacity: 0.5;
+    margin-top: 5px;
+}
+
+.cursor-blink {
+    display: inline-block;
+    width: 0.5em;
+    height: 1.1em;
+    background-color: #10B981;
+    vertical-align: middle;
+    margin-left: 10px;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* =====================================================================
+   VACINA MOBILE - MANIFESTO
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .manifesto-section {
+        padding: 80px 0;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .kinetic-container {
+        gap: 5px;
+        margin-bottom: 40px;
+    }
+
+    .k-line {
+        white-space: normal;
+        /* Libera a quebra de linha para não vazar a tela */
+    }
+
+    .k-text {
+        font-size: clamp(2rem, 8vw, 3rem);
+        white-space: normal;
+        text-align: center;
+        letter-spacing: 0;
+        transform: none !important;
+        /* Desativa a translação via JS que causava scroll horizontal */
+    }
+
+    .terminal-box {
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        /* Empilha o texto */
+        gap: 10px;
+    }
+
+    .prompt-icon {
+        display: none;
+        /* Oculta no mobile para maximizar a área de leitura */
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .k-text {
+        font-size: 1.8rem;
+    }
+
+    .terminal-box {
+        font-size: 1.3rem;
+    }
+}
+
+/* --- SEÇÃO 3: SALA DAS MÁQUINAS (DESKTOP) --- */
+.machine-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    position: relative;
+    z-index: 10;
+    background: radial-gradient(circle at center, #0a0a0a 0%, var(--bg-color) 70%);
+}
+
+.machine-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.machine-header h2 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    color: #fff;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.machine-header p {
+    color: #888;
+    font-family: var(--fonte-tech);
+    font-size: clamp(0.9rem, 2vw, 1.2rem);
+}
+
+.core-container {
+    position: relative;
+    width: clamp(280px, 40vw, 400px);
+    height: clamp(280px, 40vw, 400px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: crosshair;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.core-container:hover {
+    transform: scale(1.05);
+}
+
+.core-container::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-top: 2px solid var(--primary-b2b);
+    border-bottom: 2px solid var(--primary-b2c);
+    animation: spin-core 10s linear infinite;
+    transition: all 0.5s ease;
+}
+
+.core-container:hover::before {
+    border: 2px solid var(--primary-b2b);
+    animation: spin-core 3s linear infinite;
+}
+
+.speed-hologram {
+    position: relative;
+    width: 80%;
+    height: 80%;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    box-shadow: 0 0 60px rgba(16, 185, 129, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    transition: all 0.5s ease;
+}
+
+.score-circle {
+    text-align: center;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.score-value {
+    font-family: var(--fonte-tech);
+    font-size: clamp(4rem, 8vw, 7rem);
+    font-weight: 700;
+    color: #10B981;
+    line-height: 1;
+    text-shadow: 0 0 30px rgba(16, 185, 129, 0.4);
+}
+
+.score-label {
+    font-size: 1rem;
+    color: #fff;
+    letter-spacing: 5px;
+    margin-top: 5px;
+}
+
+.xray-code {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 243, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(1.2);
+    transition: all 0.4s ease;
+    font-family: var(--fonte-tech);
+    color: var(--primary-b2b);
+    font-size: clamp(0.7rem, 1.5vw, 1rem);
+    text-align: left;
+}
+
+.core-container:hover .score-circle {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.core-container:hover .xray-code {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.core-container:hover .speed-hologram {
+    box-shadow: 0 0 80px rgba(0, 243, 255, 0.3);
+    border-color: rgba(0, 243, 255, 0.3);
+}
+
+.xray-code::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 100%;
+    height: 20%;
+    background: linear-gradient(to bottom, transparent, rgba(0, 243, 255, 0.6), transparent);
+    animation: scanline 2.5s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes spin-core {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes scanline {
+    0% {
+        top: -20%;
+    }
+
+    100% {
+        top: 120%;
+    }
+}
+
+/* =====================================================================
+   VACINA MOBILE - MÁQUINAS
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .machine-header {
+        margin-bottom: 60px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .machine-section {
+        padding: 60px 20px;
+    }
+
+    .core-container {
+        width: 300px;
+        /* Trava absoluta para evitar estouro */
+        height: 300px;
+    }
+
+    .core-container:hover {
+        transform: none;
+        /* Previne o bug de inchaço ao tocar na tela */
+    }
+
+    .xray-code {
+        padding: 20px;
+    }
+
+    .xray-code pre {
+        white-space: pre-wrap;
+        /* MÁGICA AQUI: Força a quebra de linha do código */
+        word-wrap: break-word;
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .core-container {
+        width: 260px;
+        /* Redução drástica para caber em telas antigas sem gerar scroll */
+        height: 260px;
+    }
+
+    .score-value {
+        font-size: 3.5rem;
+    }
+
+    .xray-code {
+        font-size: 0.65rem;
+    }
+}
+
+/* --- SEÇÃO 4: O ARQUITETO (DESKTOP) --- */
+.architect-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+    background-color: var(--bg-color);
+    position: relative;
+    z-index: 10;
+}
+
+.architect-container {
+    perspective: 1000px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.tilt-card {
+    position: relative;
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 60px;
+    overflow: hidden;
+    backdrop-filter: blur(20px);
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s ease;
+    transform-style: preserve-3d;
+}
+
+.spotlight-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(255, 255, 255, 0.06),
+            transparent 40%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.tilt-card:hover .spotlight-overlay {
+    opacity: 1;
+}
+
+.tilt-card:hover {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(0, 243, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    transform: translateZ(30px);
+}
+
+.tech-badge-small {
+    font-family: var(--fonte-tech);
+    font-size: 0.75rem;
+    color: var(--primary-b2b);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.architect-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 30px;
+    color: #fff;
+    letter-spacing: -1px;
+}
+
+.highlight-blue {
+    background: linear-gradient(90deg, #fff, var(--primary-b2b));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.architect-bio {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: #aaa;
+    line-height: 1.8;
+    margin-bottom: 40px;
+    max-width: 600px;
+}
+
+.architect-bio strong {
+    color: #fff;
+}
+
+.founder-signature {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 30px;
+}
+
+.avatar-placeholder {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, var(--bg-color), #1a1a1a);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-b2b);
+    font-size: 1.2rem;
+}
+
+.signature-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.signature-info strong {
+    color: #fff;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+.signature-info span {
+    font-family: var(--fonte-tech);
+    color: #666;
+    font-size: 0.8rem;
+}
+
+/* =====================================================================
+   VACINA MOBILE - O ARQUITETO
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .tilt-card {
+        padding: 40px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .architect-section {
+        padding: 60px 20px;
+    }
+
+    .tilt-card {
+        padding: 40px 20px;
+        transform: none !important;
+        /* MATA O 3D TILT NO MOBILE PARA EVITAR VAZAMENTO */
+        transition: none;
+        /* Remove a transição para evitar bugs de repaint no scroll */
+    }
+
+    .tilt-card:hover {
+        box-shadow: none;
+        /* Evita que o toque gere uma sombra gigante que estoure a tela */
+        border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .card-content {
+        transform: none !important;
+        /* Tira o eixo Z do texto no celular */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .architect-title {
+        font-size: 2rem;
+        text-align: center;
+    }
+
+    .architect-bio {
+        font-size: 1rem;
+        text-align: center;
+        line-height: 1.6;
+    }
+
+    .founder-signature {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+        width: 100%;
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .architect-title {
+        font-size: 1.8rem;
+    }
+
+    .tilt-card {
+        padding: 30px 15px;
+    }
+}
+
+/* --- SEÇÃO 5: O TERMINAL FINAL (FOOTER - DESKTOP) --- */
+.terminal-section {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px 40px;
+    background-color: #000;
+    position: relative;
+    z-index: 10;
+}
+
+.terminal-window {
+    width: 100%;
+    max-width: 900px;
+    background: rgba(5, 5, 5, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 243, 255, 0.05);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.terminal-header {
+    background: #111;
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+}
+
+.term-buttons {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+}
+
+.term-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.close {
+    background: #ff5f56;
+}
+
+.minimize {
+    background: #ffbd2e;
+}
+
+.expand {
+    background: #27c93f;
+}
+
+.term-title {
+    width: 100%;
+    text-align: center;
+    font-family: var(--fonte-tech);
+    color: #666;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+.terminal-body {
+    padding: 30px;
+    font-family: var(--fonte-tech);
+    color: var(--primary-b2c);
+    font-size: clamp(0.85rem, 2vw, 1rem);
+    line-height: 1.6;
+    min-height: 300px;
+}
+
+.boot-sequence {
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.hidden-cmd {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.show-cmd {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sys-msg {
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.cmd-link {
+    display: block;
+    text-decoration: none;
+    margin-bottom: 15px;
+    transition: transform 0.2s ease;
+}
+
+.prompt {
+    color: var(--primary-b2b);
+    margin-right: 10px;
+}
+
+.cmd-exec {
+    color: #fff;
+    border-bottom: 1px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.cmd-desc {
+    color: #666;
+    margin-left: 15px;
+    font-size: 0.9em;
+}
+
+.cmd-link:hover {
+    transform: translateX(10px);
+}
+
+.cmd-link:hover .cmd-exec {
+    color: var(--primary-b2c);
+    border-bottom: 1px solid var(--primary-b2c);
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+}
+
+.sys-input-line {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.term-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: var(--primary-b2c);
+    margin-left: 8px;
+    animation: blink 1s step-end infinite;
+}
+
+.copyright-log {
+    margin-top: 50px;
+    color: #444;
+    font-size: 0.8rem;
+    border-top: 1px dashed #222;
+    padding-top: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.legal-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.legal-nav a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.legal-nav a:hover {
+    color: var(--primary-b2c);
+}
+
+/* ======================================================== */
+/* 📄 MÓDULO LEGAIS E PRIVACIDADE (DESKTOP)                 */
+/* ======================================================== */
+.legal-page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background: radial-gradient(circle at top center, #0a0a0a 0%, var(--bg-color) 100%);
+}
+
+.legal-terminal {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(5, 5, 5, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 243, 255, 0.05);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+}
+
+.legal-terminal .terminal-body {
+    padding: 40px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-b2c) #111;
+}
+
+.legal-terminal .terminal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.legal-terminal .terminal-body::-webkit-scrollbar-track {
+    background: #111;
+}
+
+.legal-terminal .terminal-body::-webkit-scrollbar-thumb {
+    background-color: var(--primary-b2c);
+    border-radius: 10px;
+}
+
+.legal-content h1 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--primary-b2b);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.legal-content h2 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin: 30px 0 15px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+    padding-bottom: 5px;
+}
+
+.legal-content p,
+.legal-content li {
+    font-family: var(--fonte-padrao);
+    font-size: 1rem;
+    color: #aaa;
+    line-height: 1.8;
+    margin-bottom: 15px;
+}
+
+.legal-content ul {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.legal-content li::marker {
+    content: '> ';
+    color: var(--primary-b2c);
+    font-family: var(--fonte-tech);
+}
+
+.terminal-nav-bar {
+    padding: 20px 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: #0a0a0a;
+    border-radius: 0 0 12px 12px;
+}
+
+.btn-cd-back {
+    font-family: var(--fonte-tech);
+    color: #fff;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-cd-back:hover {
+    color: var(--primary-b2b);
+    transform: translateX(-5px);
+}
+
+/* =====================================================================
+   VACINA MOBILE - TERMINAL E LEGAIS
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .terminal-section {
+        padding: 80px 20px 40px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .terminal-section {
+        padding: 60px 15px 30px;
+    }
+
+    .terminal-header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 12px;
+    }
+
+    .term-buttons {
+        position: static;
+        justify-content: center;
+    }
+
+    .terminal-body {
+        padding: 20px 15px;
+        font-size: 0.85rem;
+    }
+
+    .cmd-link {
+        word-wrap: break-word;
+        /* Mágica para não estourar a tela com URLs compridas */
+        overflow-wrap: break-word;
+    }
+
+    .copyright-log {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+
+    /* Ajustes das Páginas Legais no Mobile */
+    .legal-page-wrapper {
+        padding: 20px 10px;
+    }
+
+    .legal-terminal .terminal-body {
+        padding: 20px;
+    }
+
+    .terminal-nav-bar {
+        padding: 15px 20px;
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .terminal-body {
+        padding: 15px 10px;
+    }
+
+    .term-title {
+        font-size: 0.7rem;
+    }
+
+    .cmd-desc {
+        display: block;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+
+    /* Quebra a descrição para a linha de baixo */
+}

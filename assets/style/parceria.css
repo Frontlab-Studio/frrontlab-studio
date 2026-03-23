@@ -1,0 +1,934 @@
+@charset "UTF-8";
+
+:root {
+    --bg-color: #030508;
+    --text-color: #ffffff;
+    --primary-cyan: #00f3ff;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(0, 243, 255, 0.15);
+    --fonte-padrao: 'Inter', sans-serif;
+    --fonte-tech: 'JetBrains Mono', monospace;
+}
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: var(--fonte-padrao);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* --- 2. NAVEGAÇÃO B2B --- */
+.glass-nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 20px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(3, 5, 8, 0.85);
+    backdrop-filter: blur(20px);
+    z-index: 1000;
+    border-bottom: 1px solid var(--border);
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo {
+    font-weight: 800;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+}
+
+.highlight-cyan {
+    color: var(--primary-cyan);
+}
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #666;
+    text-decoration: none;
+    font-family: var(--fonte-tech);
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    transition: 0.3s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.btn-back:hover {
+    color: var(--primary-cyan);
+    border-color: var(--border);
+    background: rgba(0, 243, 255, 0.05);
+}
+
+.back-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s;
+}
+
+.btn-back:hover .back-arrow {
+    transform: translateX(-3px);
+}
+
+.btn-nav {
+    border: 1px solid var(--primary-cyan);
+    color: var(--primary-cyan);
+    padding: 10px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-nav:hover {
+    background: var(--primary-cyan);
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+}
+
+/* --- 3. HERO (FIGMA VS CÓDIGO) --- */
+.hero-b2b {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 20px 50px;
+    background: radial-gradient(circle at top, #061320 0%, var(--bg-color) 70%);
+}
+
+.hero-content {
+    max-width: 800px;
+    z-index: 10;
+    margin-bottom: 60px;
+}
+
+.badge-tech {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(0, 243, 255, 0.05);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    color: var(--primary-cyan);
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-family: var(--fonte-tech);
+    font-size: 0.8rem;
+    margin-bottom: 30px;
+}
+
+.pulse-dot-cyan {
+    width: 8px;
+    height: 8px;
+    background: var(--primary-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--primary-cyan);
+    animation: pulse-cyan 1.5s infinite;
+}
+
+@keyframes pulse-cyan {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.5;
+    }
+}
+
+.hero-content h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.text-cyan {
+    color: var(--primary-cyan);
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: #aaa;
+    margin: 0 auto 40px;
+    max-width: 600px;
+}
+
+.btn-hero-cyan {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    background: transparent;
+    border: 2px solid var(--primary-cyan);
+    color: var(--primary-cyan);
+    padding: 18px 40px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 1.1rem;
+    transition: 0.3s;
+}
+
+.btn-hero-cyan:hover {
+    background: var(--primary-cyan);
+    color: #000;
+    box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+}
+
+.math-of-success {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+}
+
+.equation-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.math-sign {
+    font-size: 2.5rem;
+    font-family: var(--fonte-tech);
+    font-weight: bold;
+    color: #444;
+}
+
+.pulse-plus {
+    color: var(--primary-cyan);
+    animation: flash-cyan 2s infinite;
+}
+
+.equals-sign {
+    margin: 20px 0;
+    color: #10B981;
+    animation: drop-down 2s infinite alternate;
+}
+
+.figma-box,
+.code-box {
+    flex: 1;
+    height: 150px;
+    background: rgba(5, 5, 5, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.code-box {
+    border-color: rgba(0, 243, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.05);
+}
+
+.mock-header {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 8px 15px;
+    font-family: var(--fonte-tech);
+    font-size: 0.75rem;
+    color: #888;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: left;
+}
+
+.code-box .mock-header {
+    color: var(--primary-cyan);
+    background: rgba(0, 243, 255, 0.05);
+}
+
+.mock-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.figma-box .mock-body::before {
+    content: '';
+    width: 100%;
+    height: 40px;
+    background: #222;
+    border-radius: 4px;
+}
+
+.figma-box .mock-body::after {
+    content: '';
+    width: 70%;
+    height: 10px;
+    background: #333;
+    border-radius: 4px;
+}
+
+.code-lines span {
+    display: block;
+    height: 6px;
+    background: rgba(0, 243, 255, 0.2);
+    border-radius: 2px;
+}
+
+.code-lines span:nth-child(1) {
+    width: 80%;
+}
+
+.code-lines span:nth-child(2) {
+    width: 50%;
+    margin-left: 20px;
+    background: rgba(0, 243, 255, 0.6);
+}
+
+.code-lines span:nth-child(3) {
+    width: 90%;
+}
+
+.result-box {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(5, 15, 10, 0.8);
+    border: 1px solid rgba(16, 185, 129, 0.4);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(16, 185, 129, 0.1);
+}
+
+.result-box .mock-header {
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+}
+
+.result-body {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.notification {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--fonte-tech);
+    animation: pop-in 3s infinite;
+    opacity: 0;
+}
+
+.delay-1 {
+    animation-delay: 1s;
+}
+
+.delay-2 {
+    animation-delay: 2s;
+}
+
+@keyframes flash-cyan {
+
+    0%,
+    100% {
+        text-shadow: none;
+    }
+
+    50% {
+        text-shadow: 0 0 15px var(--primary-cyan);
+    }
+}
+
+@keyframes drop-down {
+    0% {
+        transform: translateY(-5px);
+    }
+
+    100% {
+        transform: translateY(5px);
+    }
+}
+
+@keyframes pop-in {
+    0% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    10% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    90% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+}
+
+
+/* --- 4. ARQUITETURA DE SOLUÇÕES (PAINEL DE CONTROLE) --- */
+.tech-panel-section {
+    padding: 100px 20px;
+    background-color: var(--bg-color);
+}
+
+.section-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.section-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    margin-bottom: 15px;
+}
+
+.section-header p {
+    color: #888;
+    font-size: 1.1rem;
+}
+
+.control-panel {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.btn-panel {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--fonte-tech);
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.panel-card:hover .btn-panel {
+    border-color: var(--primary-cyan);
+    color: var(--primary-cyan);
+    background: rgba(0, 243, 255, 0.05);
+}
+
+.btn-panel:hover {
+    background: var(--primary-cyan) !important;
+    color: #000 !important;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+.panel-card {
+    background: rgba(10, 15, 25, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    transition: all 0.4s ease;
+    cursor: crosshair;
+    overflow: hidden;
+}
+
+.panel-card:hover {
+    background: rgba(0, 243, 255, 0.03);
+    border-color: rgba(0, 243, 255, 0.4);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 243, 255, 0.1);
+}
+
+.level-indicator {
+    font-family: var(--fonte-tech);
+    color: #555;
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    transition: color 0.3s;
+}
+
+.panel-card:hover .level-indicator {
+    color: var(--primary-cyan);
+}
+
+.panel-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.focus-tag {
+    font-family: var(--fonte-tech);
+    font-size: 0.8rem;
+    color: var(--primary-cyan);
+    font-weight: normal;
+}
+
+.panel-desc {
+    color: #aaa;
+    font-size: 0.95rem;
+    margin-bottom: 25px;
+    min-height: 70px;
+}
+
+.tech-specs {
+    list-style: none;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+}
+
+.tech-specs li {
+    margin-bottom: 12px;
+    color: #ccc;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tech-specs i {
+    color: var(--primary-cyan);
+    font-size: 1rem;
+}
+
+.highlight-card {
+    border-color: rgba(0, 243, 255, 0.2);
+    background: linear-gradient(180deg, rgba(0, 243, 255, 0.05) 0%, transparent 100%);
+}
+
+.level-badge-cyan {
+    position: absolute;
+    top: -1px;
+    right: 20px;
+    background: var(--primary-cyan);
+    color: #000;
+    font-family: var(--fonte-tech);
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    letter-spacing: 1px;
+}
+
+.high-end-card {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.high-end-card:hover {
+    border-color: #fff;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+}
+
+.high-end-card:hover .level-indicator,
+.high-end-card:hover i {
+    color: #fff;
+}
+
+/* --- 5. O DUELO (WP VS CÓDIGO PURO) --- */
+.duelo-section {
+    padding: 100px 20px;
+    background: radial-gradient(circle at center, #040810 0%, var(--bg-color) 70%);
+}
+
+.duelo-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.duelo-card {
+    flex: 1;
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+}
+
+.bad-tech {
+    border-color: rgba(255, 68, 68, 0.2);
+    opacity: 0.7;
+}
+
+.bad-tech:hover {
+    transform: translateY(3px);
+    box-shadow: inset 0 0 30px rgba(255, 68, 68, 0.05);
+    opacity: 1;
+}
+
+.good-tech {
+    background: linear-gradient(180deg, rgba(0, 243, 255, 0.05) 0%, transparent 100%);
+    border-color: rgba(0, 243, 255, 0.3);
+}
+
+.good-tech:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 243, 255, 0.15);
+    border-color: var(--primary-cyan);
+}
+
+.duelo-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.good-tech .duelo-icon {
+    color: var(--primary-cyan);
+}
+
+.duelo-card h3 {
+    font-size: 1.6rem;
+    margin-bottom: 5px;
+    color: #fff;
+}
+
+.tech-tag {
+    display: inline-block;
+    font-family: var(--fonte-tech);
+    font-size: 0.8rem;
+    padding: 4px 12px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.cyan-tag {
+    background: rgba(0, 243, 255, 0.1);
+    color: var(--primary-cyan);
+    border: 1px solid rgba(0, 243, 255, 0.3);
+}
+
+.duelo-list {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.duelo-list li {
+    margin-bottom: 15px;
+    color: #ccc;
+    font-size: 0.95rem;
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.bad-tech .duelo-list i {
+    color: #ff4444;
+    margin-top: 4px;
+}
+
+.good-tech .duelo-list i {
+    color: var(--primary-cyan);
+    margin-top: 4px;
+}
+
+.score-box {
+    font-family: var(--fonte-tech);
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px dashed;
+}
+
+.bad-score {
+    color: #ff4444;
+    border-color: #ff4444;
+    background: rgba(255, 68, 68, 0.05);
+}
+
+.good-score {
+    color: #10B981;
+    border-color: #10B981;
+    background: rgba(16, 185, 129, 0.05);
+}
+
+/* --- 6. ACORDO FANTASMA (WHITE-LABEL) --- */
+.white-label-section {
+    padding: 100px 20px;
+    background: #020305;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ghost-container {
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ghost-icon {
+    font-size: 3rem;
+    color: rgba(255, 255, 255, 0.2);
+    margin-bottom: 20px;
+    transition: 0.5s;
+}
+
+.ghost-container:hover .ghost-icon {
+    color: var(--primary-cyan);
+    text-shadow: 0 0 20px var(--primary-cyan);
+}
+
+.ghost-container h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.ghost-container p {
+    color: #888;
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+}
+
+.ghost-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    text-align: left;
+}
+
+.ghost-item {
+    background: rgba(10, 15, 25, 0.5);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.ghost-item:hover {
+    border-color: rgba(0, 243, 255, 0.3);
+    background: rgba(0, 243, 255, 0.02);
+}
+
+.ghost-number {
+    display: block;
+    font-family: var(--fonte-tech);
+    font-size: 2rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.05);
+    margin-bottom: 15px;
+}
+
+.ghost-item:hover .ghost-number {
+    color: rgba(0, 243, 255, 0.2);
+}
+
+.ghost-item h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.ghost-item p {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
+
+/* --- 7. FAQ B2B E FECHAMENTO --- */
+.faq-section-b2b {
+    padding: 100px 20px;
+}
+
+.faq-container {
+    max-width: 800px;
+    margin: 0 auto 80px;
+}
+
+.faq-item-b2b {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.faq-item-b2b:hover {
+    border-color: rgba(0, 243, 255, 0.3);
+    background: rgba(0, 243, 255, 0.02);
+}
+
+.faq-item-b2b summary {
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: #fff;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-item-b2b summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-item-b2b summary::after {
+    content: '+';
+    color: var(--primary-cyan);
+    font-size: 1.5rem;
+    font-family: var(--fonte-tech);
+}
+
+.faq-item-b2b[open] summary::after {
+    content: '-';
+}
+
+.faq-item-b2b p {
+    margin-top: 15px;
+    color: #aaa;
+    line-height: 1.6;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-top: 15px;
+}
+
+.cta-final-b2b {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cta-final-b2b h2 {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+    margin-bottom: 10px;
+}
+
+.cta-final-b2b p {
+    color: var(--primary-cyan);
+    font-family: var(--fonte-tech);
+    margin-bottom: 30px;
+}
+
+.pulse-btn-cyan {
+    animation: btn-pulse-cyan 2s infinite;
+}
+
+@keyframes btn-pulse-cyan {
+    0% {
+        box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.4);
+    }
+
+    70% {
+        box-shadow: 0 0 0 20px rgba(0, 243, 255, 0);
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(0, 243, 255, 0);
+    }
+}
+
+/* --- 8. RODAPÉ B2B --- */
+.tech-footer {
+    text-align: center;
+    padding: 50px 20px 30px;
+    background: #000;
+    border-top: 1px solid rgba(0, 243, 255, 0.1);
+}
+
+.tech-footer .footer-logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.tech-footer p {
+    color: #444;
+    font-size: 0.85rem;
+    font-family: var(--fonte-tech);
+}
+
+@media (max-width: 768px) {
+    .glass-nav {
+        padding: 15px 20px;
+        justify-content: space-between;
+    }
+
+    .btn-nav {
+        display: none;
+    }
+
+    .equation-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .figma-box,
+    .code-box {
+        width: 100%;
+        height: auto;
+        min-height: 120px;
+    }
+
+    .pulse-plus {
+        margin: 10px 0;
+    }
+
+    .control-panel {
+        grid-template-columns: 1fr;
+    }
+
+    .duelo-container {
+        flex-direction: column;
+    }
+
+    .duelo-card {
+        padding: 30px 20px;
+    }
+}
