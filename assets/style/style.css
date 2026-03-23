@@ -1372,6 +1372,241 @@ button {
         margin-left: 0;
         margin-top: 5px;
     }
+}
 
-    /* Quebra a descrição para a linha de baixo */
+/* =====================================================================
+   MÓDULOS EXTRAS: WHATSAPP E TERMINAL DE COOKIES
+====================================================================== */
+
+/* --- WHATSAPP FLUTUANTE (PULSO HACKER) --- */
+.floating-wpp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-tap-highlight-color: transparent;
+    /* Remove pisca azul no mobile */
+}
+
+.floating-wpp img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 10px rgba(16, 185, 129, 0.4));
+}
+
+.wpp-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary-b2c);
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0.6;
+    animation: pulse-wpp 2s infinite;
+}
+
+.floating-wpp:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+@keyframes pulse-wpp {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70% {
+        transform: scale(1.3);
+        opacity: 0;
+        box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* --- TERMINAL DE COOKIES (<dialog> NATIVO) --- */
+.cookie-dialog {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    /* Remove margens automáticas do dialog nativo */
+    width: calc(100% - 40px);
+    max-width: 450px;
+    background: rgba(5, 5, 5, 0.95);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 243, 255, 0.1);
+    color: var(--text-color);
+    font-family: var(--fonte-tech);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+
+    /* Configuração para o Fade-in suave via JS */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* Trava nativa do dialog aberto */
+.cookie-dialog[open] {
+    display: block;
+}
+
+.cookie-header {
+    background: #111;
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+    font-size: 0.75rem;
+    color: #888;
+    border-radius: 8px 8px 0 0;
+}
+
+.cookie-body {
+    padding: 20px;
+}
+
+.cookie-msg {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.prompt-green {
+    color: var(--primary-b2c);
+}
+
+.cookie-link {
+    color: var(--primary-b2b);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.3s ease;
+}
+
+.cookie-link:hover {
+    color: #fff;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-terminal {
+    flex: 1;
+    padding: 10px;
+    font-family: var(--fonte-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-accept {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--primary-b2c);
+    border: 1px solid var(--primary-b2c);
+}
+
+.btn-accept:hover {
+    background: var(--primary-b2c);
+    color: #000;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-reject {
+    background: transparent;
+    color: #666;
+    border: 1px solid #333;
+}
+
+.btn-reject:hover {
+    color: #fff;
+    border-color: #666;
+}
+
+/* =====================================================================
+   VACINA MOBILE - MÓDULOS EXTRAS (WPP E COOKIES)
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .floating-wpp {
+        bottom: 25px;
+        right: 25px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .floating-wpp {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        /* Reduz levemente para celular */
+        height: 55px;
+    }
+
+    .cookie-dialog {
+        bottom: 15px;
+        left: 15px;
+        width: calc(100% - 30px);
+    }
+
+    .cookie-actions {
+        flex-direction: column;
+        /* Empilha os botões */
+        gap: 8px;
+    }
+
+    .btn-terminal {
+        width: 100%;
+        padding: 12px;
+        /* Área de toque ampliada para os dedos (Acessibilidade) */
+    }
+}
+
+/* 3. Mobile Pequeno (Telas antigas) */
+@media (width <=360px) {
+    .floating-wpp {
+        bottom: 15px;
+        right: 15px;
+        width: 48px;
+        height: 48px;
+    }
+
+    .cookie-body {
+        padding: 15px;
+    }
+
+    .cookie-msg {
+        font-size: 0.75rem;
+        margin-bottom: 15px;
+    }
+
+    .btn-terminal {
+        font-size: 0.75rem;
+        padding: 10px;
+    }
 }

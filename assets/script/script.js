@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => { 
+document.addEventListener("DOMContentLoaded", () => {
     const intro = document.getElementById('ai-intro');
     const hub = document.getElementById('hub-main');
 
@@ -238,6 +238,47 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(() => {
             cookieTerminal.close();
         }, 400); // Aguarda a transição do CSS
+    }
+
+    if (btnAcceptCookies) {
+        btnAcceptCookies.addEventListener('click', () => fecharTerminalCookie('accepted'));
+    }
+
+    if (btnRejectCookies) {
+        btnRejectCookies.addEventListener('click', () => fecharTerminalCookie('rejected'));
+    }
+
+});
+document.addEventListener("DOMContentLoaded", () => {
+    const cookieTerminal = document.getElementById('cookie-terminal');
+    const btnAcceptCookies = document.getElementById('btn-accept-cookies');
+    const btnRejectCookies = document.getElementById('btn-reject-cookies');
+
+    // Verifica se já existe autorização salva
+    if (cookieTerminal && !localStorage.getItem('frontlab_sys_auth')) {
+        // Delay de 3 segundos para não destruir a nota LCP do PageSpeed
+        setTimeout(() => {
+            cookieTerminal.show(); // Abre a tag <dialog> nativa
+
+            // Pequeno delay pro CSS processar o display block antes da transição
+            requestAnimationFrame(() => {
+                cookieTerminal.style.opacity = '1';
+                cookieTerminal.style.transform = 'translateY(0)';
+            });
+        }, 3000);
+    }
+
+    function fecharTerminalCookie(status) {
+        localStorage.setItem('frontlab_sys_auth', status);
+
+        // Animação de saída
+        cookieTerminal.style.opacity = '0';
+        cookieTerminal.style.transform = 'translateY(20px)';
+
+        // Aguarda o tempo da transição CSS para fechar do DOM
+        setTimeout(() => {
+            cookieTerminal.close();
+        }, 400);
     }
 
     if (btnAcceptCookies) {
