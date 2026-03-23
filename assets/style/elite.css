@@ -19,21 +19,77 @@
     box-sizing: border-box;
 }
 
+/* TRAVA GLOBAL CONTRA VAZAMENTO E ZOOM MOBILE */
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    touch-action: manipulation;
+    /* Elimina o zoom de duplo toque no celular */
 }
 
 body {
-    min-height: 100vh;
+    min-height: 100dvh;
+    /* Evita bugs com a barra de endereços móvel */
+    width: 100vw;
+    max-width: 100%;
+    /* Força o limite real da tela */
+    overflow-x: hidden;
+    /* Corta qualquer elemento que tente vazar */
     font-family: var(--fonte-padrao);
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
     position: relative;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* --- 2. NAVEGAÇÃO --- */
+/* OTIMIZAÇÃO DE LEITURA E ELEMENTOS FLUIDOS */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+    /* Previne viúvas tipográficas */
+}
+
+img,
+picture,
+svg,
+video {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* --- 2. NAVEGAÇÃO (DESKTOP) --- */
 .glass-nav {
     position: fixed;
     top: 0;
@@ -52,6 +108,10 @@ body {
     font-weight: 800;
     font-size: 1.5rem;
     letter-spacing: 2px;
+}
+
+.highlight-green {
+    color: var(--primary-green);
 }
 
 .nav-left {
@@ -97,17 +157,6 @@ body {
     transform: translateX(-3px);
 }
 
-@media (max-width: 768px) {
-    .nav-left {
-        width: 100%;
-        justify-content: space-between;
-    }
-}
-
-.highlight-green {
-    color: var(--primary-green);
-}
-
 .btn-nav {
     border: 1px solid var(--primary-green);
     color: var(--primary-green);
@@ -126,7 +175,7 @@ body {
     box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
 }
 
-/* --- 3. HERO (ENTRADA) --- */
+/* --- 3. HERO DE ENTRADA (DESKTOP) --- */
 .hero-section {
     min-height: 100dvh;
     display: flex;
@@ -212,6 +261,7 @@ body {
 .btn-hero {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
     background: var(--primary-green);
     color: #000;
@@ -228,7 +278,72 @@ body {
     box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
 }
 
-/* --- 4. RAIO-X DO PREJUÍZO (COMPARAÇÃO) --- */
+/* =====================================================================
+   VACINA MOBILE - NAV E HERO
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .glass-nav {
+        padding: 20px 30px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .glass-nav {
+        padding: 15px 20px;
+        justify-content: center;
+    }
+
+    .nav-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btn-nav {
+        display: none;
+        /* Oculta o botão de nav para limpar o topo no mobile */
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .btn-hero {
+        width: 100%;
+        /* Botão full-width para facilitar conversão via dedão */
+        padding: 16px 20px;
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .glass-nav {
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+
+    .btn-back {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn-hero {
+        font-size: 1rem;
+        padding: 15px;
+    }
+}
+
+/* --- 4. RAIO-X DO PREJUÍZO (COMPARAÇÃO - DESKTOP) --- */
 .raiox-section {
     padding: 100px 20px;
     text-align: center;
@@ -253,6 +368,9 @@ body {
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--border);
+    /* Previne a tela de ser arrastada acidentalmente no mobile ao usar o slider */
+    touch-action: pan-y;
+    user-select: none;
 }
 
 .bad-side,
@@ -275,7 +393,10 @@ body {
 .good-side {
     background: #051a10;
     color: var(--primary-green);
+    /* Inicia cortado exatamente no meio (50%) */
     clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+    /* Will-change avisa o navegador para usar aceleração de GPU na animação */
+    will-change: clip-path;
 }
 
 .content-bad,
@@ -315,6 +436,51 @@ body {
     }
 }
 
+/* Textos Laterais */
+.hole-text {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.bad-hole {
+    left: 0;
+}
+
+.good-hole {
+    right: 0;
+}
+
+.hole-title {
+    font-family: var(--fonte-tech);
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+.bad-hole .hole-title {
+    color: #ff4444;
+}
+
+.good-hole .hole-title {
+    color: var(--primary-green);
+}
+
+.hole-text p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #ccc;
+}
+
+/* Controles do Slider */
 .slider-control {
     position: absolute;
     top: 0;
@@ -322,6 +488,7 @@ body {
     width: 100%;
     height: 100%;
     opacity: 0;
+    /* Esconde o input real, usamos apenas o trigger dele */
     cursor: ew-resize;
     z-index: 10;
 }
@@ -341,37 +508,83 @@ body {
     justify-content: center;
     font-weight: bold;
     pointer-events: none;
+    /* Deixa o clique passar para o input range */
     z-index: 5;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease, color 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    .glass-nav {
-        justify-content: center;
-        padding: 15px 0;
+/* =====================================================================
+   VACINA MOBILE - RAIO-X COMPARAÇÃO
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .hole-text {
+        padding: 20px;
     }
 
-    .btn-nav {
-        display: none;
+    .hole-title {
+        font-size: 0.9rem;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .raiox-section {
+        padding: 60px 20px;
     }
 
     .comparison-slider {
-        height: 500px;
+        height: 350px;
     }
+
+    /* Oculta o excesso de texto lateral no celular para focar no núcleo visual */
+    .hole-text {
+        display: none;
+    }
+
     .content-bad,
     .content-good {
-        width: 100% !important;
-        left: 0 !important;
-        right: auto !important;
-        display: flex !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        padding: 20px !important;
+        width: 100%;
+        /* No celular a camada precisa ocupar 100% para o corte funcionar perfeitamente */
+        left: 0;
+        right: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .content-bad h3,
+    .content-good h3 {
+        font-size: 1.3rem;
     }
 }
 
-/* --- 5. OFERTA PREMIUM (PROJETO ELITE) --- */
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .comparison-slider {
+        height: 300px;
+    }
+
+    .content-bad p,
+    .content-good p {
+        font-size: 0.85rem;
+    }
+
+    .loading-circle {
+        width: 40px;
+        height: 40px;
+    }
+
+    .check-icon {
+        font-size: 2.5rem;
+    }
+}
+
+/* --- 5. OFERTA PREMIUM (PROJETO ELITE - DESKTOP) --- */
 .oferta-section {
     padding: 100px 20px;
     background: radial-gradient(circle at top, #0a1510 0%, var(--bg-color) 70%);
@@ -418,6 +631,17 @@ body {
     backdrop-filter: blur(10px);
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(16, 185, 129, 0.05);
     text-align: left;
+
+    /* Configuração da Animação de Entrada */
+    opacity: 0;
+    transform: translateY(40px);
+    transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease;
+}
+
+/* Classe ativada via JS */
+.pricing-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .price-row {
@@ -444,6 +668,10 @@ body {
 }
 
 .free {
+    display: inline-block;
+    min-width: 90px;
+    /* Trava a largura para os números não empurrarem o layout no JS */
+    text-align: center;
     color: var(--primary-green);
     background: rgba(16, 185, 129, 0.1);
     padding: 5px 15px;
@@ -506,19 +734,37 @@ body {
     font-family: var(--fonte-tech);
 }
 
-@media (max-width: 480px) {
+/* =====================================================================
+   VACINA MOBILE - OFERTA
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .pricing-card {
+        padding: 30px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .oferta-section {
+        padding: 60px 20px;
+    }
+
     .pricing-card {
         padding: 25px 20px;
+        transform: translateY(20px);
+        /* Reduz o pulo da animação no celular */
     }
 
     .price-row {
         flex-direction: column;
         align-items: flex-start;
-        gap: 5px;
+        gap: 8px;
     }
 
     .highlight {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
     }
 
     .free {
@@ -526,10 +772,28 @@ body {
     }
 }
 
-/* --- 6. O PROCESSO (TIMELINE) --- */
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .oferta-container h2 {
+        font-size: 1.8rem;
+    }
+
+    .detail-value {
+        font-size: 1.2rem;
+    }
+
+    .btn-full {
+        padding: 15px;
+        font-size: 0.9rem;
+    }
+}
+
+/* --- 6. O PROCESSO (TIMELINE - DESKTOP) --- */
 .process-section {
     padding: 100px 20px;
     background-color: var(--bg-color);
+    overflow: hidden;
+    /* Evita que animações laterais vazem a tela */
 }
 
 .timeline {
@@ -539,6 +803,7 @@ body {
     padding-left: 40px;
 }
 
+/* Linha de fundo apagada */
 .timeline::before {
     content: '';
     position: absolute;
@@ -546,16 +811,40 @@ body {
     top: 0;
     bottom: 0;
     width: 2px;
-    background: rgba(16, 185, 129, 0.2);
+    background: rgba(16, 185, 129, 0.1);
+}
+
+/* Linha de progresso animada via JS */
+.timeline-progress {
+    position: absolute;
+    left: 15px;
+    top: 0;
+    width: 2px;
+    background: var(--primary-green);
+    height: 0;
+    /* Começa zerada */
+    box-shadow: 0 0 10px var(--primary-green);
+    transition: height 0.5s ease-out;
+    z-index: 1;
 }
 
 .timeline-step {
     position: relative;
     margin-bottom: 50px;
+    z-index: 10;
+    opacity: 0.3;
+    transform: translateX(20px);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .timeline-step:last-child {
     margin-bottom: 0;
+}
+
+/* Estado Ativado via JS */
+.timeline-step.is-active {
+    opacity: 1;
+    transform: translateX(0);
 }
 
 .step-dot {
@@ -565,22 +854,35 @@ body {
     width: 32px;
     height: 32px;
     background: #000;
-    border: 2px solid var(--primary-green);
-    color: var(--primary-green);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    color: rgba(16, 185, 129, 0.5);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     font-family: var(--fonte-tech);
-    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+    transition: all 0.5s ease;
     z-index: 2;
+}
+
+/* Bolinha brilha quando ativada */
+.timeline-step.is-active .step-dot {
+    border-color: var(--primary-green);
+    color: #000;
+    background: var(--primary-green);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
 }
 
 .step-content h3 {
     color: #fff;
     font-size: 1.3rem;
     margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.timeline-step.is-active .step-content h3 {
+    color: var(--primary-green);
 }
 
 .step-content p {
@@ -588,12 +890,301 @@ body {
     line-height: 1.6;
 }
 
-/* --- 7. FAQ E FECHAMENTO --- */
+/* =====================================================================
+   VACINA MOBILE - PROCESSO (TIMELINE)
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .process-section {
+        padding: 80px 20px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .process-section {
+        padding: 60px 20px;
+    }
+
+    .timeline {
+        padding-left: 35px;
+        /* Reduz recuo esquerdo */
+    }
+
+    .timeline::before,
+    .timeline-progress {
+        left: 10px;
+    }
+
+    .step-dot {
+        left: -35px;
+        width: 28px;
+        height: 28px;
+        font-size: 0.9rem;
+    }
+
+    .step-content h3 {
+        font-size: 1.15rem;
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .timeline {
+        padding-left: 30px;
+    }
+
+    .timeline::before,
+    .timeline-progress {
+        left: 8px;
+    }
+
+    .step-dot {
+        left: -30px;
+        width: 24px;
+        height: 24px;
+        font-size: 0.8rem;
+    }
+
+    .step-content p {
+        font-size: 0.9rem;
+    }
+}
+
+/* --- SEÇÃO EXTRA: FEEDBACK E PROVA SOCIAL (DESKTOP) --- */
+.feedback-section {
+    padding: 100px 20px;
+    background: radial-gradient(circle at center, #08120d 0%, var(--bg-color) 80%);
+    border-top: 1px solid rgba(16, 185, 129, 0.05);
+    overflow: hidden;
+}
+
+.feedback-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/* Track de rolagem com aceleração de hardware nativa */
+.feedback-track {
+    display: flex;
+    gap: 30px;
+    padding: 20px 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    /* Mágica do CSS para efeito de carrossel de app */
+    scrollbar-width: none;
+    /* Esconde barra de rolagem no Firefox */
+    -ms-overflow-style: none;
+    /* Esconde barra no IE/Edge */
+}
+
+.feedback-track::-webkit-scrollbar {
+    display: none;
+    /* Esconde barra no Chrome/Safari */
+}
+
+.feedback-card {
+    flex: 0 0 calc(33.333% - 20px);
+    /* 3 cards no desktop */
+    background: rgba(5, 5, 5, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 30px;
+    scroll-snap-align: center;
+    /* Alinha o card no centro ao parar de deslizar */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+
+    /* Preparação para a Animação JS */
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+}
+
+/* O JS vai injetar essa classe sequencialmente */
+.feedback-card.booted {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.feedback-card:hover {
+    border-color: rgba(16, 185, 129, 0.3);
+    transform: translateY(-5px);
+}
+
+.card-sys-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.sys-dot.online {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-green);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--primary-green);
+}
+
+.sys-log-id {
+    font-family: var(--fonte-tech);
+    font-size: 0.75rem;
+    color: #666;
+    letter-spacing: 1px;
+}
+
+.feedback-text {
+    font-size: 1.05rem;
+    color: #ccc;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+.feedback-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.author-avatar {
+    width: 45px;
+    height: 45px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: var(--primary-green);
+    font-family: var(--fonte-tech);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    /* Quadrado arredondado, mais tech que círculo */
+    font-weight: bold;
+}
+
+.author-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.author-info strong {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.author-info span {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.rating {
+    color: var(--primary-green);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+}
+
+.scroll-indicator {
+    text-align: center;
+    margin-top: 20px;
+    font-family: var(--fonte-tech);
+    font-size: 0.8rem;
+    color: #666;
+    display: none;
+    /* Oculto no desktop */
+}
+
+/* =====================================================================
+   VACINA MOBILE - FEEDBACK CAROUSEL
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .feedback-card {
+        flex: 0 0 calc(50% - 15px);
+        /* 2 cards por tela no tablet */
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .feedback-section {
+        padding: 60px 0;
+        /* Remove padding lateral para o carrossel grudar nas bordas */
+    }
+
+    .feedback-section .section-header {
+        padding: 0 20px;
+        /* Mantém o título contido */
+    }
+
+    .feedback-track {
+        padding: 20px;
+        /* Adiciona respiro nas bordas do scroll */
+        gap: 15px;
+    }
+
+    .feedback-card {
+        flex: 0 0 85%;
+        /* No celular, mostra 1 card inteiro e um pedacinho do próximo para induzir o deslize */
+        padding: 25px 20px;
+    }
+
+    .feedback-card:hover {
+        transform: none;
+        /* Evita que o card pule ao tocar na tela */
+    }
+
+    .feedback-text {
+        font-size: 0.95rem;
+    }
+
+    .scroll-indicator {
+        display: block;
+        /* Mostra o aviso para deslizar no mobile */
+        animation: pulse-text 2s infinite;
+    }
+
+    @keyframes pulse-text {
+
+        0%,
+        100% {
+            opacity: 0.5;
+        }
+
+        50% {
+            opacity: 1;
+        }
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .feedback-card {
+        flex: 0 0 90%;
+    }
+
+    .author-info strong {
+        font-size: 0.9rem;
+    }
+}
+
+/* --- 7. FAQ E FECHAMENTO (DESKTOP) --- */
 .faq-section {
     padding: 100px 20px;
     background: #050a08;
     /* Tom super escuro de verde */
     border-top: 1px solid rgba(16, 185, 129, 0.1);
+    overflow: hidden;
 }
 
 .faq-container {
@@ -684,61 +1275,316 @@ body {
     }
 }
 
-/* --- 8. RODAPÉ --- */
-.simple-footer {
-    text-align: center;
-    padding: 30px 20px;
+/* Animação Inicial Oculta (JS vai ativar) */
+.faq-anim {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.faq-anim.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- 8. RODAPÉ CYBER --- */
+.cyber-footer {
     background: #000;
-    color: #444;
-    font-size: 0.9rem;
-    font-family: var(--fonte-tech);
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+    padding: 30px 20px;
 }
 
-.hole-text {
-    position: absolute;
-    width: 50%;
-    height: 100%;
-    padding: 40px;
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    opacity: 0.8;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.bad-hole {
-    left: 0;
-}
-
-.good-hole {
-    right: 0;
-}
-
-.hole-title {
+.sys-copyright {
+    color: #444;
+    font-size: 0.85rem;
     font-family: var(--fonte-tech);
-    font-size: 1.1rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
 }
 
-.bad-hole .hole-title {
-    color: #ff4444;
+.legal-links {
+    display: flex;
+    gap: 30px;
 }
 
-.good-hole .hole-title {
+.legal-cmd {
+    font-family: var(--fonte-tech);
+    font-size: 0.85rem;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prompt-arrow {
+    color: var(--primary-green);
+    opacity: 0.3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.legal-cmd:hover {
+    color: var(--primary-green);
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.legal-cmd:hover .prompt-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+/* =====================================================================
+   VACINA MOBILE - FAQ & FOOTER
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .faq-container {
+        padding: 0 20px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .faq-section {
+        padding: 60px 20px;
+    }
+
+    .faq-item summary {
+        font-size: 1rem;
+        line-height: 1.4;
+        gap: 15px;
+        /* Distância entre o texto e o ícone de + */
+    }
+
+    .cta-final h2 {
+        font-size: 1.8rem;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .legal-links {
+        gap: 20px;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .faq-item {
+        padding: 15px;
+    }
+
+    .faq-item summary {
+        font-size: 0.95rem;
+    }
+
+    .legal-links {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+}
+
+/* =====================================================================
+   MÓDULOS EXTRAS: WHATSAPP E TERMINAL DE COOKIES
+====================================================================== */
+
+/* --- WHATSAPP FLUTUANTE (PULSO HACKER) --- */
+.floating-wpp {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.floating-wpp img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 10px rgba(16, 185, 129, 0.4));
+}
+
+.wpp-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary-green);
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0.6;
+    animation: pulse-wpp 2s infinite;
+}
+
+.floating-wpp:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+@keyframes pulse-wpp {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    70% {
+        transform: scale(1.3);
+        opacity: 0;
+        box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+/* --- TERMINAL DE COOKIES (<dialog> NATIVO) --- */
+.cookie-dialog {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    width: calc(100% - 40px);
+    max-width: 450px;
+    background: rgba(5, 5, 5, 0.95);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(16, 185, 129, 0.1);
+    color: var(--text-color);
+    font-family: var(--fonte-tech);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+
+    /* Configuração para o Fade-in suave via JS */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cookie-dialog[open] {
+    display: block;
+}
+
+.cookie-header {
+    background: #111;
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(16, 185, 129, 0.2);
+    font-size: 0.75rem;
+    color: #888;
+    border-radius: 8px 8px 0 0;
+}
+
+.cookie-body {
+    padding: 20px;
+}
+
+.cookie-msg {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.prompt-green {
     color: var(--primary-green);
 }
 
-.hole-text p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    color: #ccc;
+.cookie-link {
+    color: var(--primary-green);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    .hole-text {
-        display: none;
+.cookie-link:hover {
+    color: #fff;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-terminal {
+    flex: 1;
+    padding: 10px;
+    font-family: var(--fonte-tech);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-accept {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--primary-green);
+    border: 1px solid var(--primary-green);
+}
+
+.btn-accept:hover {
+    background: var(--primary-green);
+    color: #000;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-reject {
+    background: transparent;
+    color: #666;
+    border: 1px solid #333;
+}
+
+.btn-reject:hover {
+    color: #fff;
+    border-color: #666;
+}
+
+/* Vacina Mobile */
+@media (width <=768px) {
+    .floating-wpp {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+
+    .cookie-dialog {
+        bottom: 15px;
+        left: 15px;
+        width: calc(100% - 30px);
+    }
+
+    .cookie-actions {
+        flex-direction: column;
     }
 }

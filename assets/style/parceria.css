@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* --- 1. BASE OBRIGATÓRIA B2B --- */
 :root {
     --bg-color: #030508;
     --text-color: #ffffff;
@@ -18,19 +19,78 @@
     box-sizing: border-box;
 }
 
+/* TRAVA GLOBAL CONTRA VAZAMENTO E ZOOM MOBILE */
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+    touch-action: manipulation;
+    /* Elimina o zoom de duplo toque no celular */
 }
 
 body {
+    min-height: 100dvh;
+    /* Evita bugs com a barra de endereços móvel */
+    width: 100vw;
+    max-width: 100%;
+    /* Força o limite real da tela */
+    overflow-x: hidden;
+    /* Corta qualquer elemento que tente vazar na horizontal */
     font-family: var(--fonte-padrao);
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
 }
 
-/* --- 2. NAVEGAÇÃO B2B --- */
+/* OTIMIZAÇÃO DE LEITURA E ELEMENTOS FLUIDOS */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-wrap: balance;
+    /* Previne viúvas tipográficas */
+}
+
+img,
+picture,
+svg,
+video {
+    max-width: 100%;
+    display: block;
+    height: auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s ease;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+}
+
+/* ACESSIBILIDADE - REDUÇÃO DE MOVIMENTO */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* --- 2. NAVEGAÇÃO B2B (DESKTOP) --- */
 .glass-nav {
     position: fixed;
     top: 0;
@@ -110,7 +170,7 @@ body {
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
 }
 
-/* --- 3. HERO (FIGMA VS CÓDIGO) --- */
+/* --- 3. HERO (FIGMA VS CÓDIGO - DESKTOP) --- */
 .hero-b2b {
     min-height: 100vh;
     min-height: 100dvh;
@@ -186,6 +246,7 @@ body {
 .btn-hero-cyan {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
     background: transparent;
     border: 2px solid var(--primary-cyan);
@@ -236,7 +297,6 @@ body {
 .equals-sign {
     margin: 20px 0;
     color: #10B981;
-    animation: drop-down 2s infinite alternate;
 }
 
 .figma-box,
@@ -298,20 +358,13 @@ body {
     height: 6px;
     background: rgba(0, 243, 255, 0.2);
     border-radius: 2px;
-}
-
-.code-lines span:nth-child(1) {
-    width: 80%;
+    width: 0%;
+    /* Oculto inicialmente para a animação JS */
 }
 
 .code-lines span:nth-child(2) {
-    width: 50%;
     margin-left: 20px;
     background: rgba(0, 243, 255, 0.6);
-}
-
-.code-lines span:nth-child(3) {
-    width: 90%;
 }
 
 .result-box {
@@ -336,7 +389,8 @@ body {
     gap: 10px;
 }
 
-.notification {
+/* Notificações Invisíveis inicialmente */
+.sys-notif {
     background: rgba(16, 185, 129, 0.1);
     border: 1px solid rgba(16, 185, 129, 0.2);
     color: #fff;
@@ -347,16 +401,8 @@ body {
     align-items: center;
     gap: 10px;
     font-family: var(--fonte-tech);
-    animation: pop-in 3s infinite;
     opacity: 0;
-}
-
-.delay-1 {
-    animation-delay: 1s;
-}
-
-.delay-2 {
-    animation-delay: 2s;
+    transform: translateY(10px);
 }
 
 @keyframes flash-cyan {
@@ -371,43 +417,96 @@ body {
     }
 }
 
-@keyframes drop-down {
-    0% {
-        transform: translateY(-5px);
-    }
+/* =====================================================================
+   VACINA MOBILE - NAV E HERO B2B
+====================================================================== */
 
-    100% {
-        transform: translateY(5px);
-    }
-}
-
-@keyframes pop-in {
-    0% {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-
-    10% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    90% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(0.9);
-        opacity: 0;
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .glass-nav {
+        padding: 20px 30px;
     }
 }
 
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .glass-nav {
+        padding: 15px 20px;
+        justify-content: center;
+    }
 
-/* --- 4. ARQUITETURA DE SOLUÇÕES (PAINEL DE CONTROLE) --- */
+    .nav-left {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .btn-nav {
+        display: none;
+    }
+
+    /* Limpa o menu no celular */
+
+    .hero-b2b {
+        padding: 100px 20px 40px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2rem, 8vw, 3rem);
+    }
+
+    .btn-hero-cyan {
+        width: 100%;
+        padding: 16px 20px;
+    }
+
+    /* Equação fluida no Mobile */
+    .equation-top {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .figma-box,
+    .code-box {
+        width: 100%;
+        height: auto;
+        min-height: 120px;
+    }
+
+    .pulse-plus {
+        margin: 10px 0;
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .glass-nav {
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 1.2rem;
+    }
+
+    .btn-back {
+        font-size: 0.75rem;
+        padding: 6px 8px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .btn-hero-cyan {
+        font-size: 1rem;
+        padding: 15px;
+    }
+}
+
+/* --- 4. ARQUITETURA DE SISTEMAS (PAINEL CYBER) --- */
 .tech-panel-section {
     padding: 100px 20px;
     background-color: var(--bg-color);
+    position: relative;
 }
 
 .section-header {
@@ -426,74 +525,85 @@ body {
     font-size: 1.1rem;
 }
 
+/* O Grid */
 .control-panel {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
-    max-width: 900px;
+    max-width: 1000px;
+    /* Alargado um pouco para dar respiro aos cards tech */
     margin: 0 auto;
 }
 
-.btn-panel {
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    margin-top: 20px;
-    padding: 12px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
-    text-decoration: none;
-    font-family: var(--fonte-tech);
-    font-size: 0.9rem;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-}
-
-.panel-card:hover .btn-panel {
-    border-color: var(--primary-cyan);
-    color: var(--primary-cyan);
-    background: rgba(0, 243, 255, 0.05);
-}
-
-.btn-panel:hover {
-    background: var(--primary-cyan) !important;
-    color: #000 !important;
-    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
-}
-
-.panel-card {
-    background: rgba(10, 15, 25, 0.6);
+/* O Cyber Card (Efeito Magnético e Vidro) */
+.cyber-card {
+    background: rgba(10, 15, 25, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    padding: 30px;
     position: relative;
-    transition: all 0.4s ease;
     cursor: crosshair;
     overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, border-color 0.3s ease;
+
+    /* Preparo para Animação de Entrada */
+    opacity: 0;
+    transform: translateY(30px);
 }
 
-.panel-card:hover {
-    background: rgba(0, 243, 255, 0.03);
-    border-color: rgba(0, 243, 255, 0.4);
+.cyber-card.system-online {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.cyber-card:hover {
+    border-color: rgba(0, 243, 255, 0.3);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 243, 255, 0.1);
+}
+
+/* O Efeito do JS (Luz seguindo o mouse) */
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(600px circle at var(--mouse-x, -500px) var(--mouse-y, -500px),
+            rgba(0, 243, 255, 0.1),
+            transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.cyber-card:hover .card-glow {
+    opacity: 1;
+}
+
+/* Conteúdo do Card */
+.card-content {
+    padding: 35px 30px;
+    position: relative;
+    z-index: 2;
+    /* Fica acima da luz do mouse */
 }
 
 .level-indicator {
     font-family: var(--fonte-tech);
     color: #555;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     letter-spacing: 2px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
     transition: color 0.3s;
 }
 
-.panel-card:hover .level-indicator {
+.cyber-card:hover .level-indicator {
     color: var(--primary-cyan);
 }
 
-.panel-card h3 {
+.cyber-card h3 {
     font-size: 1.8rem;
     margin-bottom: 15px;
     color: #fff;
@@ -536,41 +646,127 @@ body {
     font-size: 1rem;
 }
 
+/* Botões */
+.btn-panel {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin-top: 25px;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-decoration: none;
+    font-family: var(--fonte-tech);
+    font-size: 0.9rem;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.cyber-card:hover .btn-panel {
+    border-color: var(--primary-cyan);
+    color: var(--primary-cyan);
+    background: rgba(0, 243, 255, 0.05);
+}
+
+.btn-panel:hover {
+    background: var(--primary-cyan) !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
+}
+
+/* Modificadores dos Cards Especiais */
 .highlight-card {
     border-color: rgba(0, 243, 255, 0.2);
-    background: linear-gradient(180deg, rgba(0, 243, 255, 0.05) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(0, 243, 255, 0.08) 0%, rgba(10, 15, 25, 0.4) 100%);
 }
 
 .level-badge-cyan {
     position: absolute;
-    top: -1px;
-    right: 20px;
+    top: 0;
+    right: 30px;
     background: var(--primary-cyan);
     color: #000;
     font-family: var(--fonte-tech);
     font-size: 0.75rem;
     font-weight: bold;
-    padding: 4px 12px;
+    padding: 6px 15px;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     letter-spacing: 1px;
+    z-index: 3;
+    box-shadow: 0 5px 15px rgba(0, 243, 255, 0.3);
 }
 
 .high-end-card {
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
 .high-end-card:hover {
-    border-color: #fff;
-    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+    border: 1px solid #fff;
+    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.1);
 }
 
-.high-end-card:hover .level-indicator,
-.high-end-card:hover i {
-    color: #fff;
+.btn-high-end:hover {
+    background: #fff !important;
+    color: #000 !important;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
-/* --- 5. O DUELO (WP VS CÓDIGO PURO) --- */
+/* =====================================================================
+   VACINA MOBILE - PAINEL CYBER
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .control-panel {
+        padding: 0 20px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .tech-panel-section {
+        padding: 80px 20px;
+    }
+
+    .control-panel {
+        grid-template-columns: 1fr;
+        /* Força 1 coluna no mobile */
+        gap: 20px;
+        padding: 0;
+    }
+
+    .card-content {
+        padding: 25px 20px;
+        /* Reduz padding interno para caber melhor na tela */
+    }
+
+    .panel-desc {
+        min-height: auto;
+        /* Tira altura fixa que sobobra espaço no mobile */
+    }
+
+    .cyber-card:hover {
+        transform: none;
+        /* Desliga o pulinho no toque do celular */
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .cyber-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .level-badge-cyan {
+        right: 15px;
+        padding: 4px 10px;
+        font-size: 0.7rem;
+    }
+}
+
+/* --- 5. O DUELO (BENCHMARK B2B) --- */
 .duelo-section {
     padding: 100px 20px;
     background: radial-gradient(circle at center, #040810 0%, var(--bg-color) 70%);
@@ -591,21 +787,81 @@ body {
     border-radius: 12px;
     padding: 40px;
     text-align: center;
-    transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
+
+    /* Preparo para animação JS de entrada */
+    opacity: 0;
+    transform: scale(0.95);
+    transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.duelo-card.in-view {
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .bad-tech {
     border-color: rgba(255, 68, 68, 0.2);
     opacity: 0.7;
+    /* Mantém meio opaco nativamente para dar sensação de 'ruim' */
 }
 
-.bad-tech:hover {
-    transform: translateY(3px);
-    box-shadow: inset 0 0 30px rgba(255, 68, 68, 0.05);
-    opacity: 1;
+.bad-tech.in-view {
+    opacity: 0.85;
+}
+
+/* Overlay de Glitch (Ativado via JS) */
+.glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 68, 68, 0.05);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.bad-tech.is-glitching .glitch-overlay {
+    animation: wp-glitch 0.2s 3;
+}
+
+@keyframes wp-glitch {
+    0% {
+        transform: translate(0) scale(1);
+        opacity: 0;
+    }
+
+    20% {
+        transform: translate(-5px, 5px) scale(1.02);
+        opacity: 0.5;
+        background: rgba(255, 68, 68, 0.1);
+    }
+
+    40% {
+        transform: translate(-5px, -5px) scale(1);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translate(5px, 5px) scale(1.01);
+        opacity: 0.8;
+        background: rgba(255, 68, 68, 0.2);
+    }
+
+    80% {
+        transform: translate(5px, -5px) scale(1);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(0) scale(1);
+        opacity: 0;
+    }
 }
 
 .good-tech {
@@ -655,7 +911,7 @@ body {
 .duelo-list {
     list-style: none;
     text-align: left;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 .duelo-list li {
@@ -677,55 +933,155 @@ body {
     margin-top: 4px;
 }
 
+/* Benchmark UI */
+.benchmark-ui {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: left;
+}
+
+.benchmark-label {
+    display: block;
+    font-family: var(--fonte-tech);
+    font-size: 0.75rem;
+    color: #666;
+    margin-bottom: 10px;
+}
+
 .score-box {
     font-family: var(--fonte-tech);
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px dashed;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
 }
 
 .bad-score {
     color: #ff4444;
-    border-color: #ff4444;
-    background: rgba(255, 68, 68, 0.05);
 }
 
 .good-score {
     color: #10B981;
-    border-color: #10B981;
-    background: rgba(16, 185, 129, 0.05);
 }
 
-/* --- 6. ACORDO FANTASMA (WHITE-LABEL) --- */
+.score-number {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* Barras de Progresso de Teste */
+.progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    /* Inicia zerada pro JS animar */
+    border-radius: 3px;
+}
+
+.js-bar-bad {
+    background: #ff4444;
+}
+
+.js-bar-good {
+    background: var(--primary-cyan);
+    box-shadow: 0 0 10px var(--primary-cyan);
+}
+
+/* =====================================================================
+   VACINA MOBILE - DUELO BENCHMARK
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .duelo-container {
+        padding: 0 20px;
+    }
+
+    .duelo-card {
+        padding: 30px 20px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .duelo-section {
+        padding: 80px 20px;
+    }
+
+    .duelo-container {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .good-tech:hover {
+        transform: none;
+        /* Desliga pulo no celular para evitar clique acidental */
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .duelo-card h3 {
+        font-size: 1.4rem;
+    }
+
+    .duelo-list li {
+        font-size: 0.85rem;
+    }
+}
+
+/* --- 6. ACORDO FANTASMA (WHITE-LABEL B2B) --- */
 .white-label-section {
     padding: 100px 20px;
     background: #020305;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Luz de fundo do Radar Fantasma */
+.white-label-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(0, 243, 255, 0.03) 0%, transparent 70%);
+    pointer-events: none;
 }
 
 .ghost-container {
     max-width: 900px;
     margin: 0 auto;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .ghost-icon {
     font-size: 3rem;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.1);
     margin-bottom: 20px;
     transition: 0.5s;
 }
 
 .ghost-container:hover .ghost-icon {
     color: var(--primary-cyan);
-    text-shadow: 0 0 20px var(--primary-cyan);
+    text-shadow: 0 0 20px rgba(0, 243, 255, 0.6);
 }
 
 .ghost-container h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 4vw, 2.8rem);
     margin-bottom: 15px;
 }
 
@@ -747,12 +1103,15 @@ body {
     border: 1px dashed rgba(255, 255, 255, 0.1);
     padding: 30px;
     border-radius: 8px;
-    transition: 0.3s;
+    transition: all 0.4s ease;
+    backdrop-filter: blur(5px);
 }
 
 .ghost-item:hover {
     border-color: rgba(0, 243, 255, 0.3);
-    background: rgba(0, 243, 255, 0.02);
+    background: rgba(0, 243, 255, 0.03);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 243, 255, 0.05);
 }
 
 .ghost-number {
@@ -762,6 +1121,7 @@ body {
     font-weight: bold;
     color: rgba(255, 255, 255, 0.05);
     margin-bottom: 15px;
+    transition: color 0.4s ease;
 }
 
 .ghost-item:hover .ghost-number {
@@ -777,12 +1137,75 @@ body {
 .ghost-item p {
     color: #aaa;
     font-size: 0.9rem;
+    line-height: 1.6;
     margin-bottom: 0;
 }
 
-/* --- 7. FAQ B2B E FECHAMENTO --- */
+/* O Segredo da Animação JS: Classes de Camuflagem */
+.stealth-element {
+    opacity: 0;
+    filter: blur(10px);
+    /* Borra a visão inicial */
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stealth-element.uncloaked {
+    opacity: 1;
+    filter: blur(0);
+    /* Remove o desfoque */
+    transform: translateY(0) scale(1);
+}
+
+/* =====================================================================
+   VACINA MOBILE - ACORDO FANTASMA
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .ghost-container {
+        padding: 0 20px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .white-label-section {
+        padding: 80px 20px;
+    }
+
+    .ghost-grid {
+        grid-template-columns: 1fr;
+        /* Coluna única no celular */
+        gap: 20px;
+    }
+
+    .ghost-item {
+        padding: 25px 20px;
+    }
+
+    .ghost-item:hover {
+        transform: none;
+        /* Trava o pulo para não dar conflito com o touch */
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .ghost-icon {
+        font-size: 2.5rem;
+    }
+
+    .ghost-container h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* --- 7. FAQ B2B E FECHAMENTO (DESKTOP) --- */
 .faq-section-b2b {
     padding: 100px 20px;
+    background: radial-gradient(circle at bottom, #061320 0%, var(--bg-color) 60%);
+    overflow: hidden;
 }
 
 .faq-container {
@@ -791,18 +1214,26 @@ body {
 }
 
 .faq-item-b2b {
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(10, 15, 25, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     margin-bottom: 15px;
     padding: 20px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
 .faq-item-b2b:hover {
     border-color: rgba(0, 243, 255, 0.3);
-    background: rgba(0, 243, 255, 0.02);
+    background: rgba(0, 243, 255, 0.05);
+}
+
+/* Quando o item está aberto */
+.faq-item-b2b[open] {
+    border-color: var(--primary-cyan);
+    background: rgba(0, 243, 255, 0.05);
+    box-shadow: 0 10px 30px rgba(0, 243, 255, 0.05);
 }
 
 .faq-item-b2b summary {
@@ -811,33 +1242,55 @@ body {
     color: #fff;
     list-style: none;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 15px;
+    transition: color 0.3s;
 }
 
 .faq-item-b2b summary::-webkit-details-marker {
     display: none;
 }
 
-.faq-item-b2b summary::after {
-    content: '+';
+.prompt-sign {
     color: var(--primary-cyan);
-    font-size: 1.5rem;
     font-family: var(--fonte-tech);
+    font-weight: normal;
+    transition: transform 0.3s ease;
 }
 
-.faq-item-b2b[open] summary::after {
-    content: '-';
+/* Rotaciona a setinha quando abre */
+.faq-item-b2b[open] summary .prompt-sign {
+    transform: rotate(90deg);
 }
 
-.faq-item-b2b p {
+.faq-answer {
     margin-top: 15px;
+    border-top: 1px dashed rgba(0, 243, 255, 0.2);
+    padding-top: 15px;
+
+    /* Animação suave nativa de entrada do texto */
+    animation: fade-in-down 0.4s ease forwards;
+}
+
+.faq-answer p {
     color: #aaa;
     line-height: 1.6;
-    border-top: 1px dashed rgba(255, 255, 255, 0.1);
-    padding-top: 15px;
+    font-size: 0.95rem;
 }
 
+@keyframes fade-in-down {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fechamento (CTA Final) */
 .cta-final-b2b {
     text-align: center;
     max-width: 600px;
@@ -852,10 +1305,14 @@ body {
 .cta-final-b2b p {
     color: var(--primary-cyan);
     font-family: var(--fonte-tech);
-    margin-bottom: 30px;
+    margin-bottom: 40px;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
 }
 
 .pulse-btn-cyan {
+    position: relative;
+    background: rgba(0, 243, 255, 0.1);
     animation: btn-pulse-cyan 2s infinite;
 }
 
@@ -873,62 +1330,336 @@ body {
     }
 }
 
-/* --- 8. RODAPÉ B2B --- */
+/* Classes controladas pelo JS (Cascata de Entrada) */
+.faq-anim-b2b {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.faq-anim-b2b.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =====================================================================
+   VACINA MOBILE - FAQ B2B E CTA
+====================================================================== */
+
+/* 1. Tablet & Notebook */
+@media (width <=1024px) {
+    .faq-container {
+        padding: 0 20px;
+    }
+}
+
+/* 2. Mobile Padrão */
+@media (width <=768px) {
+    .faq-section-b2b {
+        padding: 80px 20px;
+    }
+
+    .faq-item-b2b summary {
+        font-size: 1rem;
+        line-height: 1.4;
+        gap: 10px;
+    }
+
+    .cta-final-b2b h2 {
+        font-size: 1.8rem;
+    }
+
+    .faq-item-b2b:hover {
+        transform: none;
+        /* Previne glitches de hover no touch */
+    }
+}
+
+/* 3. Mobile Pequeno */
+@media (width <=360px) {
+    .faq-item-b2b {
+        padding: 15px;
+    }
+
+    .faq-item-b2b summary {
+        font-size: 0.95rem;
+    }
+
+    .cta-final-b2b p {
+        font-size: 0.8rem;
+    }
+}
+
+/* --- 8. RODAPÉ B2B E MÓDULOS FLUTUANTES --- */
 .tech-footer {
-    text-align: center;
-    padding: 50px 20px 30px;
     background: #000;
-    border-top: 1px solid rgba(0, 243, 255, 0.1);
+    border-top: 1px dashed rgba(0, 243, 255, 0.15);
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.footer-brand {
+    text-align: left;
 }
 
 .tech-footer .footer-logo {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     letter-spacing: 2px;
 }
 
-.tech-footer p {
-    color: #444;
+.sys-copyright {
+    color: #555;
     font-size: 0.85rem;
     font-family: var(--fonte-tech);
 }
 
-@media (max-width: 768px) {
-    .glass-nav {
-        padding: 15px 20px;
-        justify-content: space-between;
+.legal-links {
+    display: flex;
+    gap: 30px;
+}
+
+.legal-cmd {
+    font-family: var(--fonte-tech);
+    font-size: 0.85rem;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.prompt-arrow {
+    color: var(--primary-cyan);
+    opacity: 0.3;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.legal-cmd:hover {
+    color: var(--primary-cyan);
+    text-shadow: 0 0 10px rgba(0, 243, 255, 0.4);
+}
+
+.legal-cmd:hover .prompt-arrow {
+    opacity: 1;
+    transform: translateX(3px);
+}
+
+/* --- WHATSAPP FLUTUANTE (PULSO CYAN) --- */
+.floating-wpp-cyan {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.floating-wpp-cyan img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 2;
+    border-radius: 50%;
+    filter: drop-shadow(0 4px 10px rgba(0, 243, 255, 0.2));
+}
+
+.wpp-glow-cyan {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--primary-cyan);
+    border-radius: 50%;
+    z-index: 1;
+    opacity: 0.6;
+    animation: pulse-wpp-cyan 2s infinite;
+}
+
+.floating-wpp-cyan:hover {
+    transform: scale(1.1) translateY(-5px);
+}
+
+@keyframes pulse-wpp-cyan {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+        box-shadow: 0 0 0 0 rgba(0, 243, 255, 0.5);
     }
 
-    .btn-nav {
-        display: none;
+    70% {
+        transform: scale(1.3);
+        opacity: 0;
+        box-shadow: 0 0 0 15px rgba(0, 243, 255, 0);
     }
 
-    .equation-top {
+    100% {
+        transform: scale(1);
+        opacity: 0;
+        box-shadow: 0 0 0 0 rgba(0, 243, 255, 0);
+    }
+}
+
+/* --- TERMINAL DE COOKIES B2B --- */
+.cookie-dialog-cyan {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    margin: 0;
+    width: calc(100% - 40px);
+    max-width: 450px;
+    background: rgba(5, 8, 12, 0.95);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 15px rgba(0, 243, 255, 0.05);
+    color: var(--text-color);
+    font-family: var(--fonte-tech);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.cookie-dialog-cyan[open] {
+    display: block;
+}
+
+.cookie-header-cyan {
+    background: #060a0f;
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(0, 243, 255, 0.15);
+    font-size: 0.75rem;
+    color: #888;
+    border-radius: 8px 8px 0 0;
+}
+
+.cookie-body {
+    padding: 20px;
+}
+
+.cookie-msg {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #aaa;
+}
+
+.prompt-cyan {
+    color: var(--primary-cyan);
+    font-weight: bold;
+}
+
+.cookie-link-cyan {
+    color: var(--primary-cyan);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.3s ease;
+}
+
+.cookie-link-cyan:hover {
+    color: #fff;
+}
+
+.cookie-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-terminal-cyan {
+    flex: 1;
+    padding: 10px;
+    font-family: var(--fonte-tech);
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.btn-accept-cyan {
+    background: rgba(0, 243, 255, 0.05);
+    color: var(--primary-cyan);
+    border: 1px solid var(--primary-cyan);
+}
+
+.btn-accept-cyan:hover {
+    background: var(--primary-cyan);
+    color: #000;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.4);
+}
+
+.btn-reject-cyan {
+    background: transparent;
+    color: #666;
+    border: 1px dashed #333;
+}
+
+.btn-reject-cyan:hover {
+    color: #fff;
+    border-color: #666;
+}
+
+/* =====================================================================
+   VACINA MOBILE - FOOTER E FLUTUANTES B2B
+====================================================================== */
+@media (width <=768px) {
+    .footer-content {
         flex-direction: column;
-        gap: 10px;
+        text-align: center;
+        gap: 20px;
     }
 
-    .figma-box,
-    .code-box {
+    .footer-brand {
+        text-align: center;
+    }
+
+    .legal-links {
         width: 100%;
-        height: auto;
-        min-height: 120px;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
     }
 
-    .pulse-plus {
-        margin: 10px 0;
+    .floating-wpp-cyan {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
     }
 
-    .control-panel {
-        grid-template-columns: 1fr;
+    .cookie-dialog-cyan {
+        bottom: 15px;
+        left: 15px;
+        width: calc(100% - 30px);
     }
 
-    .duelo-container {
+    .cookie-actions {
         flex-direction: column;
-    }
-
-    .duelo-card {
-        padding: 30px 20px;
     }
 }
