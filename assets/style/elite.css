@@ -270,14 +270,18 @@ button {
     box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
 }
 
-/* --- VACINA MOBILE - NAV E HERO --- */
+/* =====================================================================
+   VACINA MOBILE - NAV E HERO
+====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .glass-nav {
         padding: 20px 30px;
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .glass-nav {
         padding: 15px 20px;
@@ -303,6 +307,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .glass-nav {
         padding: 15px;
@@ -492,8 +497,11 @@ button {
     transition: box-shadow 0.3s ease, color 0.3s ease;
 }
 
-/* --- VACINA MOBILE - RAIO-X COMPARAÇÃO --- */
+/* =====================================================================
+   VACINA MOBILE - RAIO-X COMPARAÇÃO
+====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .hole-text {
         padding: 20px;
@@ -504,6 +512,7 @@ button {
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .raiox-section {
         padding: 60px 20px;
@@ -535,6 +544,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .comparison-slider {
         height: 300px;
@@ -702,14 +712,18 @@ button {
     font-family: var(--fonte-tech);
 }
 
-/* --- VACINA MOBILE - OFERTA --- */
+/* =====================================================================
+   VACINA MOBILE - OFERTA
+====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .pricing-card {
         padding: 30px;
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .oferta-section {
         padding: 60px 20px;
@@ -735,6 +749,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .oferta-container h2 {
         font-size: 1.8rem;
@@ -846,14 +861,18 @@ button {
     line-height: 1.6;
 }
 
-/* --- VACINA MOBILE - PROCESSO (TIMELINE) --- */
+/* =====================================================================
+   VACINA MOBILE - PROCESSO (TIMELINE)
+====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .process-section {
         padding: 80px 20px;
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .process-section {
         padding: 60px 20px;
@@ -880,6 +899,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .timeline {
         padding-left: 30px;
@@ -932,6 +952,7 @@ button {
 
 .feedback-card {
     flex: 0 0 calc(33.333% - 20px);
+    /* 3 cards no desktop */
     background: rgba(5, 5, 5, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
@@ -1042,14 +1063,18 @@ button {
     display: none;
 }
 
-/* --- VACINA MOBILE - FEEDBACK CAROUSEL --- */
+/* =====================================================================
+   VACINA MOBILE - FEEDBACK CAROUSEL
+====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .feedback-card {
         flex: 0 0 calc(50% - 15px);
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .feedback-section {
         padding: 60px 0;
@@ -1095,6 +1120,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .feedback-card {
         flex: 0 0 90%;
@@ -1267,14 +1293,18 @@ button {
     transform: translateX(3px);
 }
 
-/* --- VACINA MOBILE - FAQ & FOOTER --- */
+/* =====================================================================
+   VACINA MOBILE - FAQ & FOOTER
+====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .faq-container {
         padding: 0 20px;
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .faq-section {
         padding: 60px 20px;
@@ -1303,6 +1333,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .faq-item {
         padding: 15px;
@@ -1319,7 +1350,9 @@ button {
     }
 }
 
-/* --- MÓDULOS EXTRAS: WHATSAPP E TERMINAL DE COOKIES --- */
+/* =====================================================================
+   MÓDULOS EXTRAS: WHATSAPP E TERMINAL DE COOKIES
+====================================================================== */
 
 /* --- WHATSAPP FLUTUANTE (PULSO HACKER) --- */
 .floating-wpp {

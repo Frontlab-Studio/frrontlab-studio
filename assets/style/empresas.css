@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* --- 1. BASE OBRIGATÓRIA --- */
 :root {
     --bg-color: #030303;
     --text-color: #ffffff;
@@ -281,6 +282,7 @@ button {
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .glass-nav {
         padding: 15px 20px;
@@ -306,6 +308,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .glass-nav {
         padding: 15px;
@@ -499,6 +502,7 @@ button {
    VACINA MOBILE - RAIO-X COMPARAÇÃO
 ====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .hole-text {
         padding: 20px;
@@ -509,6 +513,7 @@ button {
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .raiox-section {
         padding: 60px 20px;
@@ -540,6 +545,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .comparison-slider {
         height: 300px;
@@ -711,12 +717,14 @@ button {
    VACINA MOBILE - OFERTA
 ====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .pricing-card {
         padding: 30px;
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .oferta-section {
         padding: 60px 20px;
@@ -742,6 +750,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .oferta-container h2 {
         font-size: 1.8rem;
@@ -857,12 +866,14 @@ button {
    VACINA MOBILE - PROCESSO (TIMELINE)
 ====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .process-section {
         padding: 80px 20px;
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .process-section {
         padding: 60px 20px;
@@ -889,6 +900,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .timeline {
         padding-left: 30px;
@@ -941,6 +953,7 @@ button {
 
 .feedback-card {
     flex: 0 0 calc(33.333% - 20px);
+    /* 3 cards no desktop */
     background: rgba(5, 5, 5, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
@@ -1055,12 +1068,14 @@ button {
    VACINA MOBILE - FEEDBACK CAROUSEL
 ====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .feedback-card {
         flex: 0 0 calc(50% - 15px);
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .feedback-section {
         padding: 60px 0;
@@ -1106,6 +1121,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .feedback-card {
         flex: 0 0 90%;
@@ -1282,12 +1298,14 @@ button {
    VACINA MOBILE - FAQ & FOOTER
 ====================================================================== */
 
+/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .faq-container {
         padding: 0 20px;
     }
 }
 
+/* 2. Mobile Padrão */
 @media (width <=768px) {
     .faq-section {
         padding: 60px 20px;
@@ -1316,6 +1334,7 @@ button {
     }
 }
 
+/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .faq-item {
         padding: 15px;
