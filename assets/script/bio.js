@@ -13,3 +13,17 @@ document.querySelectorAll('.bio-link').forEach(link => {
         setTimeout(() => { window.location.href = url; }, 400);
     });
 });
+const cookieDialog = document.getElementById('cookie-consent');
+
+// Verifica se já aceitou anteriormente
+if (!localStorage.getItem('cookies-accepted')) {
+    // Abre o dialog com um leve delay para não impactar o LCP
+    setTimeout(() => {
+        cookieDialog.show();
+    }, 2000);
+}
+
+function acceptCookies() {
+    localStorage.setItem('cookies-accepted', 'true');
+    cookieDialog.close();
+}

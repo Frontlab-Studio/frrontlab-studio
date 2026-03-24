@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Suas rotas originais mantidas
     const rotas = {
+        'hub': { link: '../index.html', nome: 'hub frontlabs' },
         'clinicas': { link: '../promo-clinicas/elite.html', nome: 'Projeto Elite 20' },
         'micro': { link: '../promo-micro/impulso.html', nome: 'Impulso Inicial' },
         'empresas': { link: '../empresas/empresas.html', nome: 'Acelerador B2B' },

@@ -373,3 +373,114 @@ body {
 .orange-link:hover .title {
     color: #F97316;
 }
+
+/* Container do Rodapé */
+.bio-footer {
+    margin-top: auto;
+    padding-top: var(--spacing-gap);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    /* Cheat Code: Melhora renderização inicial ignorando o footer no primeiro frame */
+    content-visibility: auto;
+    contain-intrinsic-size: 0 100px;
+}
+
+/* Menu de Protocolo Legal */
+.legal-protocol {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 20px;
+}
+
+.legal-link {
+    font-family: var(--fonte-tech);
+    font-size: var(--fs-small);
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.3s ease;
+}
+
+.code-prefix {
+    color: var(--primary-cyan);
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+.protocol-divider {
+    width: 4px;
+    height: 4px;
+    background: var(--border);
+    border-radius: 50%;
+}
+
+/* Efeito Hover Criativo */
+.legal-link:hover {
+    color: #fff;
+    filter: drop-shadow(0 0 5px var(--primary-cyan));
+}
+
+.legal-link:hover .code-prefix {
+    opacity: 1;
+    transform: translateX(-2px);
+}
+
+/* Mobile Small Adjustment */
+@media (width <=360px) {
+    .legal-protocol {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .protocol-divider {
+        display: none;
+    }
+}
+
+.cookie-bar {
+    position: fixed;
+    top: auto;
+    bottom: 20px;
+    margin: 0 auto;
+    width: clamp(300px, 90%, 400px);
+    background: var(--glass);
+    border: 1px solid var(--primary-cyan);
+    border-radius: 12px;
+    padding: 15px 20px;
+    backdrop-filter: blur(15px);
+    color: #fff;
+    z-index: 9999;
+}
+
+.cookie-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    text-align: center;
+}
+
+.cookie-content p {
+    font-size: var(--fs-small);
+    font-family: var(--fonte-tech);
+}
+
+.btn-accept {
+    background: var(--primary-cyan);
+    color: #000;
+    padding: 8px 25px;
+    border-radius: 6px;
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.btn-accept:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--primary-cyan);
+}

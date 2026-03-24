@@ -13,7 +13,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="../assets/style/bio.css">
-    <link rel="shortcut icon" href="../assets/svg/logo.png" type="image/x-png">
+    <link rel="shortcut icon" href="../assets/svg/logo-trasparente.png" type="image/x-png">
 </head>
 
 <body>
@@ -24,8 +24,8 @@
         <header class="bio-header">
             <div class="logo-container">
                 <div class="pulse-ring"></div>
-                <img src="../assets/svg/icon-site.png" alt="Frontlab Ícone" width="80" height="80" fetchpriority="high"
-                    class="bio-avatar">
+                <img src="../assets/svg/logo-trasparente.png" alt="Frontlab Ícone" width="80" height="80"
+                    fetchpriority="high" class="bio-avatar">
             </div>
             <h1>FRONTLAB <span class="highlight-cyan">STUDIO</span></h1>
             <p class="bio-desc">Engenharia Web de Alta Performance.<br>Nós construímos o que os templates não alcançam.
@@ -90,7 +90,7 @@
                     </div>
                 </div>
             </a>
-            <a href="../promo-micro-empresas/impulso.html" class="bio-link orange-link">
+            <a href="../promo-micro/impulso.html" class="bio-link orange-link">
                 <div class="link-content">
                     <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -103,7 +103,7 @@
                 </div>
             </a>
 
-            <a href="../parcerias/parceria.html" class="bio-link cyan-link">
+            <a href="../parcerias/parcerias.html" class="bio-link cyan-link">
                 <div class="link-content">
                     <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -121,23 +121,46 @@
 
         </section>
 
-        <footer class="bio-socials">
-            <a href="https://www.instagram.com/frontlab.studio" target="_blank" class="social-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                </svg>
-            </a>
-            <a href="https://www.facebook.com/profile.php?id=61588626531827" target="_blank" class="social-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-                </svg>
-            </a>
+        <footer class="bio-footer">
+            <div class="bio-socials">
+                <a href="https://www.instagram.com/frontlab.studio" target="_blank" class="social-icon"
+                    aria-label="Instagram">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61588626531827" target="_blank" class="social-icon"
+                    aria-label="Facebook">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                    </svg>
+                </a>
+            </div>
+
+            <nav class="legal-protocol" aria-label="Documentação Legal">
+                <a href="../legal/termos.html?origem=bio" class="legal-link">
+                    <span class="code-prefix">[TL-26]</span> Termos de Uso
+                </a>
+                <span class="protocol-divider"></span>
+                <a href="../legal/privacidade.html?origem=bio" class="legal-link">
+                    <span class="code-prefix">[PP-26]</span> Privacidade
+                </a>
+            </nav>
         </footer>
     </main>
+    <dialog id="cookie-consent" class="cookie-bar">
+        <div class="cookie-content">
+            <p><span class="code-prefix">[SISTEMA]</span> Utilizamos cookies para otimizar sua experiência de engenharia
+                web.</p>
+            <div class="cookie-actions">
+                <button onclick="acceptCookies()" class="btn-accept">ACEITAR</button>
+            </div>
+        </div>
+    </dialog>
     <script src="../assets/script/bio.js"></script>
 </body>
 
