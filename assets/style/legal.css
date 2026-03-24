@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-/* ========================================================
-   FRONTLAB STUDIO - LEGAL & COMPLIANCE SYSTEM
-   Foco: Leitura, Contraste e Mobile-First
-======================================================== */
-
 body {
     background-color: #030303;
     color: #ffffff;
@@ -23,7 +18,6 @@ body {
     background: radial-gradient(circle at top center, rgba(0, 243, 255, 0.05) 0%, #030303 100%);
 }
 
-/* --- HEADER DINÂMICO --- */
 .legal-header {
     width: 100%;
     max-width: 800px;
@@ -62,7 +56,6 @@ body {
     text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
 }
 
-/* --- TERMINAL DE LEITURA --- */
 .legal-terminal {
     width: 100%;
     max-width: 800px;

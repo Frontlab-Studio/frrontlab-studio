@@ -251,7 +251,6 @@ button {
     z-index: 2;
     max-width: 400px;
     padding: clamp(20px, 5vw, 40px);
-    /* Padding fluido */
     text-align: left;
     transform: translateY(20px);
     opacity: 0.8;
@@ -375,12 +374,6 @@ button {
     transition: right 0.8s cubic-bezier(0.8, 0, 0.2, 1);
 }
 
-
-/* =====================================================================
-   VACINA MOBILE - HUB & INTRO
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .split-container {
         flex-direction: column;
@@ -391,7 +384,6 @@ button {
         border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    /* DESATIVA A EXPANSÃO NO TOUCH: O "hover" no touch causa vazamento e buga a tela */
     .portal:hover {
         flex: 1;
     }
@@ -401,7 +393,6 @@ button {
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .intro-container {
         padding: 0 20px;
@@ -414,7 +405,6 @@ button {
         line-height: 1.2;
     }
 
-    /* Trava o conteúdo para não precisar de "hover" e alinha no centro */
     .portal-content {
         text-align: center;
         transform: none;
@@ -429,17 +419,14 @@ button {
         margin-bottom: 25px;
     }
 
-    /* Remove brilhos pesados no celular para focar em performance */
     .overlay-glow {
         display: none;
     }
 }
 
-/* 3. Mobile Pequeno (Onde ocorria o zoom de segurança do navegador) */
 @media (width <=360px) {
     .portal-content {
         padding: 15px;
-        /* Reduz o padding para evitar estouro da grid de 280px */
     }
 
     .portal h2 {
@@ -538,18 +525,13 @@ button {
     }
 }
 
-/* =====================================================================
-   VACINA MOBILE - MANIFESTO
-====================================================================== */
 
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .manifesto-section {
         padding: 80px 0;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .kinetic-container {
         gap: 5px;
@@ -558,7 +540,6 @@ button {
 
     .k-line {
         white-space: normal;
-        /* Libera a quebra de linha para não vazar a tela */
     }
 
     .k-text {
@@ -567,7 +548,6 @@ button {
         text-align: center;
         letter-spacing: 0;
         transform: none !important;
-        /* Desativa a translação via JS que causava scroll horizontal */
     }
 
     .terminal-box {
@@ -575,17 +555,14 @@ button {
         align-items: center;
         text-align: center;
         flex-direction: column;
-        /* Empilha o texto */
         gap: 10px;
     }
 
     .prompt-icon {
         display: none;
-        /* Oculta no mobile para maximizar a área de leitura */
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .k-text {
         font-size: 1.8rem;
@@ -762,18 +739,12 @@ button {
     }
 }
 
-/* =====================================================================
-   VACINA MOBILE - MÁQUINAS
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .machine-header {
         margin-bottom: 60px;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .machine-section {
         padding: 60px 20px;
@@ -781,13 +752,11 @@ button {
 
     .core-container {
         width: 300px;
-        /* Trava absoluta para evitar estouro */
         height: 300px;
     }
 
     .core-container:hover {
         transform: none;
-        /* Previne o bug de inchaço ao tocar na tela */
     }
 
     .xray-code {
@@ -796,16 +765,13 @@ button {
 
     .xray-code pre {
         white-space: pre-wrap;
-        /* MÁGICA AQUI: Força a quebra de linha do código */
         word-wrap: break-word;
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .core-container {
         width: 260px;
-        /* Redução drástica para caber em telas antigas sem gerar scroll */
         height: 260px;
     }
 
@@ -954,18 +920,13 @@ button {
     font-size: 0.8rem;
 }
 
-/* =====================================================================
-   VACINA MOBILE - O ARQUITETO
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .tilt-card {
         padding: 40px;
     }
 }
 
-/* 2. Mobile Padrão */
+
 @media (width <=768px) {
     .architect-section {
         padding: 60px 20px;
@@ -974,20 +935,16 @@ button {
     .tilt-card {
         padding: 40px 20px;
         transform: none !important;
-        /* MATA O 3D TILT NO MOBILE PARA EVITAR VAZAMENTO */
         transition: none;
-        /* Remove a transição para evitar bugs de repaint no scroll */
     }
 
     .tilt-card:hover {
         box-shadow: none;
-        /* Evita que o toque gere uma sombra gigante que estoure a tela */
         border-color: rgba(255, 255, 255, 0.05);
     }
 
     .card-content {
         transform: none !important;
-        /* Tira o eixo Z do texto no celular */
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -1013,7 +970,6 @@ button {
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .architect-title {
         font-size: 1.8rem;
@@ -1196,9 +1152,8 @@ button {
     color: var(--primary-b2c);
 }
 
-/* ======================================================== */
-/* 📄 MÓDULO LEGAIS E PRIVACIDADE (DESKTOP)                 */
-/* ======================================================== */
+/*  MÓDULO LEGAIS E PRIVACIDADE (DESKTOP)  */
+
 .legal-page-wrapper {
     min-height: 100vh;
     display: flex;
@@ -1298,18 +1253,12 @@ button {
     transform: translateX(-5px);
 }
 
-/* =====================================================================
-   VACINA MOBILE - TERMINAL E LEGAIS
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .terminal-section {
         padding: 80px 20px 40px;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .terminal-section {
         padding: 60px 15px 30px;
@@ -1333,7 +1282,6 @@ button {
 
     .cmd-link {
         word-wrap: break-word;
-        /* Mágica para não estourar a tela com URLs compridas */
         overflow-wrap: break-word;
     }
 
@@ -1343,7 +1291,6 @@ button {
         gap: 15px;
     }
 
-    /* Ajustes das Páginas Legais no Mobile */
     .legal-page-wrapper {
         padding: 20px 10px;
     }
@@ -1357,7 +1304,6 @@ button {
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .terminal-body {
         padding: 15px 10px;
@@ -1374,11 +1320,9 @@ button {
     }
 }
 
-/* =====================================================================
-   MÓDULOS EXTRAS: WHATSAPP E TERMINAL DE COOKIES
-====================================================================== */
 
-/* --- WHATSAPP FLUTUANTE (PULSO HACKER) --- */
+  /* MÓDULOS EXTRAS: WHATSAPP E TERMINAL DE COOKIES */
+
 .floating-wpp {
     position: fixed;
     bottom: 30px;
@@ -1392,7 +1336,6 @@ button {
     border-radius: 50%;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     -webkit-tap-highlight-color: transparent;
-    /* Remove pisca azul no mobile */
 }
 
 .floating-wpp img {
@@ -1442,13 +1385,12 @@ button {
     }
 }
 
-/* --- TERMINAL DE COOKIES (<dialog> NATIVO) --- */
+/* COOKIES */
 .cookie-dialog {
     position: fixed;
     bottom: 20px;
     left: 20px;
     margin: 0;
-    /* Remove margens automáticas do dialog nativo */
     width: calc(100% - 40px);
     max-width: 450px;
     background: rgba(5, 5, 5, 0.95);
@@ -1460,13 +1402,11 @@ button {
     backdrop-filter: blur(10px);
     z-index: 9999;
 
-    /* Configuração para o Fade-in suave via JS */
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Trava nativa do dialog aberto */
 .cookie-dialog[open] {
     display: block;
 }
@@ -1546,11 +1486,6 @@ button {
     border-color: #666;
 }
 
-/* =====================================================================
-   VACINA MOBILE - MÓDULOS EXTRAS (WPP E COOKIES)
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .floating-wpp {
         bottom: 25px;
@@ -1558,13 +1493,11 @@ button {
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .floating-wpp {
         bottom: 20px;
         right: 20px;
         width: 55px;
-        /* Reduz levemente para celular */
         height: 55px;
     }
 
@@ -1576,18 +1509,15 @@ button {
 
     .cookie-actions {
         flex-direction: column;
-        /* Empilha os botões */
         gap: 8px;
     }
 
     .btn-terminal {
         width: 100%;
         padding: 12px;
-        /* Área de toque ampliada para os dedos (Acessibilidade) */
     }
 }
 
-/* 3. Mobile Pequeno (Telas antigas) */
 @media (width <=360px) {
     .floating-wpp {
         bottom: 15px;

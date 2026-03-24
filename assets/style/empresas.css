@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-/* --- 1. BASE OBRIGATÓRIA --- */
 :root {
     --bg-color: #030303;
     --text-color: #ffffff;
@@ -19,23 +18,18 @@
     box-sizing: border-box;
 }
 
-/* TRAVA GLOBAL CONTRA VAZAMENTO E ZOOM MOBILE */
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
     touch-action: manipulation;
-    /* Elimina o zoom de duplo toque no celular */
 }
 
 body {
     min-height: 100dvh;
-    /* Evita bugs com a barra de endereços móvel */
     width: 100vw;
     max-width: 100%;
-    /* Força o limite real da tela */
     overflow-x: hidden;
-    /* Corta qualquer elemento que tente vazar */
     font-family: var(--fonte-padrao);
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -44,7 +38,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* OTIMIZAÇÃO DE LEITURA E ELEMENTOS FLUIDOS */
 h1,
 h2,
 h3,
@@ -52,7 +45,6 @@ h4,
 h5,
 h6 {
     text-wrap: balance;
-    /* Previne viúvas tipográficas */
 }
 
 img,
@@ -289,7 +281,6 @@ button {
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .glass-nav {
         padding: 15px 20px;
@@ -303,7 +294,6 @@ button {
 
     .btn-nav {
         display: none;
-        /* Oculta o botão de nav para limpar o topo no mobile */
     }
 
     .hero-content h1 {
@@ -312,12 +302,10 @@ button {
 
     .btn-hero {
         width: 100%;
-        /* Botão full-width para facilitar conversão via dedão */
         padding: 16px 20px;
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .glass-nav {
         padding: 15px;
@@ -368,7 +356,6 @@ button {
     border-radius: 20px;
     overflow: hidden;
     border: 1px solid var(--border);
-    /* Previne a tela de ser arrastada acidentalmente no mobile ao usar o slider */
     touch-action: pan-y;
     user-select: none;
 }
@@ -393,9 +380,7 @@ button {
 .good-side {
     background: #051a10;
     color: var(--primary-green);
-    /* Inicia cortado exatamente no meio (50%) */
     clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-    /* Will-change avisa o navegador para usar aceleração de GPU na animação */
     will-change: clip-path;
 }
 
@@ -436,7 +421,6 @@ button {
     }
 }
 
-/* Textos Laterais */
 .hole-text {
     position: absolute;
     width: 50%;
@@ -480,7 +464,6 @@ button {
     color: #ccc;
 }
 
-/* Controles do Slider */
 .slider-control {
     position: absolute;
     top: 0;
@@ -488,7 +471,6 @@ button {
     width: 100%;
     height: 100%;
     opacity: 0;
-    /* Esconde o input real, usamos apenas o trigger dele */
     cursor: ew-resize;
     z-index: 10;
 }
@@ -508,7 +490,6 @@ button {
     justify-content: center;
     font-weight: bold;
     pointer-events: none;
-    /* Deixa o clique passar para o input range */
     z-index: 5;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
     transition: box-shadow 0.3s ease, color 0.3s ease;
@@ -518,7 +499,6 @@ button {
    VACINA MOBILE - RAIO-X COMPARAÇÃO
 ====================================================================== */
 
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .hole-text {
         padding: 20px;
@@ -529,7 +509,6 @@ button {
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .raiox-section {
         padding: 60px 20px;
@@ -539,7 +518,6 @@ button {
         height: 350px;
     }
 
-    /* Oculta o excesso de texto lateral no celular para focar no núcleo visual */
     .hole-text {
         display: none;
     }
@@ -547,7 +525,6 @@ button {
     .content-bad,
     .content-good {
         width: 100%;
-        /* No celular a camada precisa ocupar 100% para o corte funcionar perfeitamente */
         left: 0;
         right: auto;
         display: flex;
@@ -563,7 +540,6 @@ button {
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .comparison-slider {
         height: 300px;
@@ -632,13 +608,11 @@ button {
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(16, 185, 129, 0.05);
     text-align: left;
 
-    /* Configuração da Animação de Entrada */
     opacity: 0;
     transform: translateY(40px);
     transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.8s ease;
 }
 
-/* Classe ativada via JS */
 .pricing-card.is-visible {
     opacity: 1;
     transform: translateY(0);
@@ -670,7 +644,6 @@ button {
 .free {
     display: inline-block;
     min-width: 90px;
-    /* Trava a largura para os números não empurrarem o layout no JS */
     text-align: center;
     color: var(--primary-green);
     background: rgba(16, 185, 129, 0.1);
@@ -738,14 +711,12 @@ button {
    VACINA MOBILE - OFERTA
 ====================================================================== */
 
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .pricing-card {
         padding: 30px;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .oferta-section {
         padding: 60px 20px;
@@ -754,7 +725,6 @@ button {
     .pricing-card {
         padding: 25px 20px;
         transform: translateY(20px);
-        /* Reduz o pulo da animação no celular */
     }
 
     .price-row {
@@ -772,7 +742,6 @@ button {
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .oferta-container h2 {
         font-size: 1.8rem;
@@ -793,7 +762,6 @@ button {
     padding: 100px 20px;
     background-color: var(--bg-color);
     overflow: hidden;
-    /* Evita que animações laterais vazem a tela */
 }
 
 .timeline {
@@ -803,7 +771,6 @@ button {
     padding-left: 40px;
 }
 
-/* Linha de fundo apagada */
 .timeline::before {
     content: '';
     position: absolute;
@@ -814,7 +781,6 @@ button {
     background: rgba(16, 185, 129, 0.1);
 }
 
-/* Linha de progresso animada via JS */
 .timeline-progress {
     position: absolute;
     left: 15px;
@@ -822,7 +788,6 @@ button {
     width: 2px;
     background: var(--primary-green);
     height: 0;
-    /* Começa zerada */
     box-shadow: 0 0 10px var(--primary-green);
     transition: height 0.5s ease-out;
     z-index: 1;
@@ -841,7 +806,6 @@ button {
     margin-bottom: 0;
 }
 
-/* Estado Ativado via JS */
 .timeline-step.is-active {
     opacity: 1;
     transform: translateX(0);
@@ -866,7 +830,6 @@ button {
     z-index: 2;
 }
 
-/* Bolinha brilha quando ativada */
 .timeline-step.is-active .step-dot {
     border-color: var(--primary-green);
     color: #000;
@@ -894,14 +857,12 @@ button {
    VACINA MOBILE - PROCESSO (TIMELINE)
 ====================================================================== */
 
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .process-section {
         padding: 80px 20px;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .process-section {
         padding: 60px 20px;
@@ -909,7 +870,6 @@ button {
 
     .timeline {
         padding-left: 35px;
-        /* Reduz recuo esquerdo */
     }
 
     .timeline::before,
@@ -929,7 +889,6 @@ button {
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .timeline {
         padding-left: 30px;
@@ -966,46 +925,37 @@ button {
     position: relative;
 }
 
-/* Track de rolagem com aceleração de hardware nativa */
 .feedback-track {
     display: flex;
     gap: 30px;
     padding: 20px 0;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
-    /* Mágica do CSS para efeito de carrossel de app */
     scrollbar-width: none;
-    /* Esconde barra de rolagem no Firefox */
     -ms-overflow-style: none;
-    /* Esconde barra no IE/Edge */
 }
 
 .feedback-track::-webkit-scrollbar {
     display: none;
-    /* Esconde barra no Chrome/Safari */
 }
 
 .feedback-card {
     flex: 0 0 calc(33.333% - 20px);
-    /* 3 cards no desktop */
     background: rgba(5, 5, 5, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
     padding: 30px;
     scroll-snap-align: center;
-    /* Alinha o card no centro ao parar de deslizar */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, border-color 0.3s ease;
 
-    /* Preparação para a Animação JS */
     opacity: 0;
     transform: translateY(30px) scale(0.95);
 }
 
-/* O JS vai injetar essa classe sequencialmente */
 .feedback-card.booted {
     opacity: 1;
     transform: translateY(0) scale(1);
@@ -1067,7 +1017,6 @@ button {
     align-items: center;
     justify-content: center;
     border-radius: 8px;
-    /* Quadrado arredondado, mais tech que círculo */
     font-weight: bold;
 }
 
@@ -1100,48 +1049,39 @@ button {
     font-size: 0.8rem;
     color: #666;
     display: none;
-    /* Oculto no desktop */
 }
 
 /* =====================================================================
    VACINA MOBILE - FEEDBACK CAROUSEL
 ====================================================================== */
 
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .feedback-card {
         flex: 0 0 calc(50% - 15px);
-        /* 2 cards por tela no tablet */
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .feedback-section {
         padding: 60px 0;
-        /* Remove padding lateral para o carrossel grudar nas bordas */
     }
 
     .feedback-section .section-header {
         padding: 0 20px;
-        /* Mantém o título contido */
     }
 
     .feedback-track {
         padding: 20px;
-        /* Adiciona respiro nas bordas do scroll */
         gap: 15px;
     }
 
     .feedback-card {
         flex: 0 0 85%;
-        /* No celular, mostra 1 card inteiro e um pedacinho do próximo para induzir o deslize */
         padding: 25px 20px;
     }
 
     .feedback-card:hover {
         transform: none;
-        /* Evita que o card pule ao tocar na tela */
     }
 
     .feedback-text {
@@ -1150,7 +1090,6 @@ button {
 
     .scroll-indicator {
         display: block;
-        /* Mostra o aviso para deslizar no mobile */
         animation: pulse-text 2s infinite;
     }
 
@@ -1167,7 +1106,6 @@ button {
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .feedback-card {
         flex: 0 0 90%;
@@ -1182,7 +1120,6 @@ button {
 .faq-section {
     padding: 100px 20px;
     background: #050a08;
-    /* Tom super escuro de verde */
     border-top: 1px solid rgba(16, 185, 129, 0.1);
     overflow: hidden;
 }
@@ -1275,7 +1212,6 @@ button {
     }
 }
 
-/* Animação Inicial Oculta (JS vai ativar) */
 .faq-anim {
     opacity: 0;
     transform: translateY(20px);
@@ -1346,14 +1282,12 @@ button {
    VACINA MOBILE - FAQ & FOOTER
 ====================================================================== */
 
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .faq-container {
         padding: 0 20px;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .faq-section {
         padding: 60px 20px;
@@ -1363,7 +1297,6 @@ button {
         font-size: 1rem;
         line-height: 1.4;
         gap: 15px;
-        /* Distância entre o texto e o ícone de + */
     }
 
     .cta-final h2 {
@@ -1383,7 +1316,6 @@ button {
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .faq-item {
         padding: 15px;
@@ -1484,7 +1416,6 @@ button {
     backdrop-filter: blur(10px);
     z-index: 9999;
 
-    /* Configuração para o Fade-in suave via JS */
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
@@ -1569,7 +1500,6 @@ button {
     border-color: #666;
 }
 
-/* Vacina Mobile */
 @media (width <=768px) {
     .floating-wpp {
         bottom: 20px;

@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-/* --- 1. BASE OBRIGATÓRIA B2B --- */
 :root {
     --bg-color: #030508;
     --text-color: #ffffff;
@@ -19,23 +18,18 @@
     box-sizing: border-box;
 }
 
-/* TRAVA GLOBAL CONTRA VAZAMENTO E ZOOM MOBILE */
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
     text-rendering: optimizeLegibility;
     touch-action: manipulation;
-    /* Elimina o zoom de duplo toque no celular */
 }
 
 body {
     min-height: 100dvh;
-    /* Evita bugs com a barra de endereços móvel */
     width: 100vw;
     max-width: 100%;
-    /* Força o limite real da tela */
     overflow-x: hidden;
-    /* Corta qualquer elemento que tente vazar na horizontal */
     font-family: var(--fonte-padrao);
     background-color: var(--bg-color);
     color: var(--text-color);
@@ -44,7 +38,6 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* OTIMIZAÇÃO DE LEITURA E ELEMENTOS FLUIDOS */
 h1,
 h2,
 h3,
@@ -52,7 +45,6 @@ h4,
 h5,
 h6 {
     text-wrap: balance;
-    /* Previne viúvas tipográficas */
 }
 
 img,
@@ -77,7 +69,6 @@ button {
     font-family: inherit;
 }
 
-/* ACESSIBILIDADE - REDUÇÃO DE MOVIMENTO */
 @media (prefers-reduced-motion: reduce) {
 
     *,
@@ -359,7 +350,6 @@ button {
     background: rgba(0, 243, 255, 0.2);
     border-radius: 2px;
     width: 0%;
-    /* Oculto inicialmente para a animação JS */
 }
 
 .code-lines span:nth-child(2) {
@@ -389,7 +379,6 @@ button {
     gap: 10px;
 }
 
-/* Notificações Invisíveis inicialmente */
 .sys-notif {
     background: rgba(16, 185, 129, 0.1);
     border: 1px solid rgba(16, 185, 129, 0.2);
@@ -417,18 +406,13 @@ button {
     }
 }
 
-/* =====================================================================
-   VACINA MOBILE - NAV E HERO B2B
-====================================================================== */
 
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .glass-nav {
         padding: 20px 30px;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .glass-nav {
         padding: 15px 20px;
@@ -444,8 +428,6 @@ button {
         display: none;
     }
 
-    /* Limpa o menu no celular */
-
     .hero-b2b {
         padding: 100px 20px 40px;
     }
@@ -459,7 +441,6 @@ button {
         padding: 16px 20px;
     }
 
-    /* Equação fluida no Mobile */
     .equation-top {
         flex-direction: column;
         gap: 10px;
@@ -477,7 +458,6 @@ button {
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .glass-nav {
         padding: 15px;
@@ -531,11 +511,8 @@ button {
     grid-template-columns: repeat(2, 1fr);
     gap: 30px;
     max-width: 1000px;
-    /* Alargado um pouco para dar respiro aos cards tech */
     margin: 0 auto;
 }
-
-/* O Cyber Card (Efeito Magnético e Vidro) */
 .cyber-card {
     background: rgba(10, 15, 25, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -545,8 +522,6 @@ button {
     overflow: hidden;
     backdrop-filter: blur(10px);
     transition: transform 0.3s ease, border-color 0.3s ease;
-
-    /* Preparo para Animação de Entrada */
     opacity: 0;
     transform: translateY(30px);
 }
@@ -562,7 +537,6 @@ button {
     transform: translateY(-5px);
 }
 
-/* O Efeito do JS (Luz seguindo o mouse) */
 .card-glow {
     position: absolute;
     top: 0;
@@ -582,12 +556,10 @@ button {
     opacity: 1;
 }
 
-/* Conteúdo do Card */
 .card-content {
     padding: 35px 30px;
     position: relative;
     z-index: 2;
-    /* Fica acima da luz do mouse */
 }
 
 .level-indicator {
@@ -646,7 +618,6 @@ button {
     font-size: 1rem;
 }
 
-/* Botões */
 .btn-panel {
     display: inline-block;
     width: 100%;
@@ -675,7 +646,6 @@ button {
     box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
 }
 
-/* Modificadores dos Cards Especiais */
 .highlight-card {
     border-color: rgba(0, 243, 255, 0.2);
     background: linear-gradient(180deg, rgba(0, 243, 255, 0.08) 0%, rgba(10, 15, 25, 0.4) 100%);
@@ -713,18 +683,12 @@ button {
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 
-/* =====================================================================
-   VACINA MOBILE - PAINEL CYBER
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .control-panel {
         padding: 0 20px;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .tech-panel-section {
         padding: 80px 20px;
@@ -732,28 +696,23 @@ button {
 
     .control-panel {
         grid-template-columns: 1fr;
-        /* Força 1 coluna no mobile */
         gap: 20px;
         padding: 0;
     }
 
     .card-content {
         padding: 25px 20px;
-        /* Reduz padding interno para caber melhor na tela */
     }
 
     .panel-desc {
         min-height: auto;
-        /* Tira altura fixa que sobobra espaço no mobile */
     }
 
     .cyber-card:hover {
         transform: none;
-        /* Desliga o pulinho no toque do celular */
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .cyber-card h3 {
         font-size: 1.5rem;
@@ -790,8 +749,6 @@ button {
     position: relative;
     overflow: hidden;
     backdrop-filter: blur(10px);
-
-    /* Preparo para animação JS de entrada */
     opacity: 0;
     transform: scale(0.95);
     transition: transform 0.4s ease, border-color 0.4s ease;
@@ -806,14 +763,12 @@ button {
 .bad-tech {
     border-color: rgba(255, 68, 68, 0.2);
     opacity: 0.7;
-    /* Mantém meio opaco nativamente para dar sensação de 'ruim' */
 }
 
 .bad-tech.in-view {
     opacity: 0.85;
 }
 
-/* Overlay de Glitch (Ativado via JS) */
 .glitch-overlay {
     position: absolute;
     top: 0;
@@ -933,7 +888,6 @@ button {
     margin-top: 4px;
 }
 
-/* Benchmark UI */
 .benchmark-ui {
     background: rgba(0, 0, 0, 0.5);
     padding: 20px;
@@ -969,7 +923,6 @@ button {
     font-weight: bold;
 }
 
-/* Barras de Progresso de Teste */
 .progress-bar-container {
     width: 100%;
     height: 6px;
@@ -981,7 +934,6 @@ button {
 .progress-bar {
     height: 100%;
     width: 0%;
-    /* Inicia zerada pro JS animar */
     border-radius: 3px;
 }
 
@@ -994,11 +946,6 @@ button {
     box-shadow: 0 0 10px var(--primary-cyan);
 }
 
-/* =====================================================================
-   VACINA MOBILE - DUELO BENCHMARK
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .duelo-container {
         padding: 0 20px;
@@ -1009,7 +956,6 @@ button {
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .duelo-section {
         padding: 80px 20px;
@@ -1022,11 +968,9 @@ button {
 
     .good-tech:hover {
         transform: none;
-        /* Desliga pulo no celular para evitar clique acidental */
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .duelo-card h3 {
         font-size: 1.4rem;
@@ -1047,7 +991,6 @@ button {
     overflow: hidden;
 }
 
-/* Luz de fundo do Radar Fantasma */
 .white-label-section::before {
     content: '';
     position: absolute;
@@ -1141,11 +1084,10 @@ button {
     margin-bottom: 0;
 }
 
-/* O Segredo da Animação JS: Classes de Camuflagem */
 .stealth-element {
     opacity: 0;
     filter: blur(10px);
-    /* Borra a visão inicial */
+
     transform: translateY(20px) scale(0.95);
     transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -1153,22 +1095,16 @@ button {
 .stealth-element.uncloaked {
     opacity: 1;
     filter: blur(0);
-    /* Remove o desfoque */
     transform: translateY(0) scale(1);
 }
 
-/* =====================================================================
-   VACINA MOBILE - ACORDO FANTASMA
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .ghost-container {
         padding: 0 20px;
     }
 }
 
-/* 2. Mobile Padrão */
+
 @media (width <=768px) {
     .white-label-section {
         padding: 80px 20px;
@@ -1176,7 +1112,6 @@ button {
 
     .ghost-grid {
         grid-template-columns: 1fr;
-        /* Coluna única no celular */
         gap: 20px;
     }
 
@@ -1186,11 +1121,10 @@ button {
 
     .ghost-item:hover {
         transform: none;
-        /* Trava o pulo para não dar conflito com o touch */
+
     }
 }
 
-/* 3. Mobile Pequeno */
 @media (width <=360px) {
     .ghost-icon {
         font-size: 2.5rem;
@@ -1229,7 +1163,6 @@ button {
     background: rgba(0, 243, 255, 0.05);
 }
 
-/* Quando o item está aberto */
 .faq-item-b2b[open] {
     border-color: var(--primary-cyan);
     background: rgba(0, 243, 255, 0.05);
@@ -1258,7 +1191,6 @@ button {
     transition: transform 0.3s ease;
 }
 
-/* Rotaciona a setinha quando abre */
 .faq-item-b2b[open] summary .prompt-sign {
     transform: rotate(90deg);
 }
@@ -1267,8 +1199,6 @@ button {
     margin-top: 15px;
     border-top: 1px dashed rgba(0, 243, 255, 0.2);
     padding-top: 15px;
-
-    /* Animação suave nativa de entrada do texto */
     animation: fade-in-down 0.4s ease forwards;
 }
 
@@ -1330,7 +1260,6 @@ button {
     }
 }
 
-/* Classes controladas pelo JS (Cascata de Entrada) */
 .faq-anim-b2b {
     opacity: 0;
     transform: translateY(20px);
@@ -1342,18 +1271,12 @@ button {
     transform: translateY(0);
 }
 
-/* =====================================================================
-   VACINA MOBILE - FAQ B2B E CTA
-====================================================================== */
-
-/* 1. Tablet & Notebook */
 @media (width <=1024px) {
     .faq-container {
         padding: 0 20px;
     }
 }
 
-/* 2. Mobile Padrão */
 @media (width <=768px) {
     .faq-section-b2b {
         padding: 80px 20px;
@@ -1371,11 +1294,10 @@ button {
 
     .faq-item-b2b:hover {
         transform: none;
-        /* Previne glitches de hover no touch */
     }
 }
 
-/* 3. Mobile Pequeno */
+
 @media (width <=360px) {
     .faq-item-b2b {
         padding: 15px;
@@ -1390,7 +1312,6 @@ button {
     }
 }
 
-/* --- 8. RODAPÉ B2B E MÓDULOS FLUTUANTES --- */
 .tech-footer {
     background: #000;
     border-top: 1px dashed rgba(0, 243, 255, 0.15);
@@ -1460,7 +1381,6 @@ button {
     transform: translateX(3px);
 }
 
-/* --- WHATSAPP FLUTUANTE (PULSO CYAN) --- */
 .floating-wpp-cyan {
     position: fixed;
     bottom: 30px;
@@ -1523,7 +1443,7 @@ button {
     }
 }
 
-/* --- TERMINAL DE COOKIES B2B --- */
+/* COOKIES */
 .cookie-dialog-cyan {
     position: fixed;
     bottom: 20px;
@@ -1625,9 +1545,6 @@ button {
     border-color: #666;
 }
 
-/* =====================================================================
-   VACINA MOBILE - FOOTER E FLUTUANTES B2B
-====================================================================== */
 @media (width <=768px) {
     .footer-content {
         flex-direction: column;
